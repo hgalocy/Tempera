@@ -1,0 +1,43 @@
+/*Specific to main page*/
+.not-logged-in{
+    height: 430px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.button-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-banner{
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+#welcome-account{
+    color: var(--secondary-color);
+}
+.featured-artist{
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 350px;
+    color: white;
+}
+.artist-photo{
+    border-radius: 50%;
+    height: 275px;
+    width: 275px;
+}
+.featured-artist-name{
+    color: var(--primary-color);
+}

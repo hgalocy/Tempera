@@ -2,6 +2,7 @@
     --primary-color: #B1F1ED;
     --secondary-color: #793F3F;
     --background-color: #FFF;
+    --input-color: rgb(196, 196, 196);
 }
 * {
   padding: 0;
@@ -56,63 +57,11 @@ nav a{
 }
 
 
-/*Specific to main page*/
-.not-logged-in{
-    height: 430px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-bottom: 20px;
-}
-.button-column{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.color2-button{
-    background-color: var(--secondary-color);
-    width: 200px;
-    height: 100px;
-    margin: 30px;
-    border-radius: 10px;
-    color: white;
-    font-size: 30px;
-}
 .horizontal-divider-line{
     width: 100%; 
     width: 100vw;
     background-color: black;
     height: 2px;
-}
-.welcome-banner{
-    height: 380px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 20px;
-}
-#welcome-account{
-    color: var(--secondary-color);
-}
-.featured-artist{
-    background-color: var(--secondary-color);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 350px;
-    color: white;
-}
-.artist-photo{
-    border-radius: 50%;
-    height: 275px;
-    width: 275px;
-}
-.featured-artist-name{
-    color: var(--primary-color);
 }
 .recommended-art h1{
     font-size: 28px;
@@ -133,4 +82,21 @@ nav a{
     height: 200px;
 }
 
-
+.color2-button{
+    background-color: var(--secondary-color);
+    width: 200px;
+    height: 100px;
+    margin: 30px;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+}
+.color1-button{
+    background-color: var(--primary-color);
+    width: 150px;
+    height: 55px;
+    margin: 10px;
+    border-radius: 15px;
+    color: black;
+    font-size: 20px;
+}
