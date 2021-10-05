@@ -1,0 +1,33 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+table{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+td{
+    font-size: 18px;
+    width: 220px;
+    height: 50px;
+    vertical-align: center;
+    text-align: left;
+}
+input{
+    background-color: var(--input-color);
+    height: 25px;
+}
+button{
+    align-self: center;
+}
+.login-section, .newLogin-section{
+    display: flex;
+    flex-direction: column;
+    width: 575px;
+    border: 5px solid var(--secondary-color);
+    border-radius: 15px;
+    margin: 20px 0px;
+    padding-bottom: 15px;
+}

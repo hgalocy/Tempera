@@ -1,30 +1,10 @@
-.settings{
-    display: flex;
-    flex-direction: column;
+.inputting{
     border:5px solid var(--secondary-color);
-    width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-}
-.settings h1{
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-    width: 475px;
-    height: 60px;
-    text-align: center;
-    align-self: center;
-    color: white;
-    font-size: 30px;
-    padding-top: 10px;
 }
 .account-settings{
     display: flex;
     flex-direction: column;
     height: 450px;
-    /*justify-content: space-evenly;*/
 }
 .artist-settings{
     display: flex;
