@@ -13,6 +13,8 @@
 body {
   font-family: 'Lato', sans-serif;
   background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
 }
 a{
     text-decoration: none;
@@ -124,4 +126,19 @@ nav a{
     color: white;
     font-size: 30px;
     padding-top: 10px;
+}
+
+/*specific to favorite.html*/
+#favorite-heading{
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    width: 90%;
+    height: 80px;
+    text-align: center;
+    align-self: center;
+    color: white;
+    font-size: 35px;
+    padding-top: 20px;
+    align-self: center;
+    margin: 30px;
 }
