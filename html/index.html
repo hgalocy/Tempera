@@ -1,4 +1,4 @@
-<!--<!DOCTYPE html>-->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/temperaStyle.css">
     <link rel="stylesheet" href="../css/index.css">
+    <script src="../node_modules/iframe-resizer/js/iframeResizer.min.js"></script>
+    <script defer src="../js/index.js"></script>
     <title>Tempera</title>
 </head>
 <body>
@@ -19,79 +21,71 @@
                 <a href="index.html"><h1>Tempera</h1></a>
             </div>
             <div class="user-icons">
-                <a id="favorite-link" href="favorite.html"><img src="../images/favorite.png"></a>
-                <a id="account-link" href="account.html"><img src="../images/account.png"></a>
+                <img id="favorite-link" src="../images/favorite.png">
+                <img id="account-link" src="../images/account.png">
             </div>
         </div>
         <nav class="nav-bar">
-            <ul>
-                <li><a href="stores.html">Stores</a></li>
-                <li><a href="art.html">Art</a></li>
-                <li><a href="about.html">About Us</a></li>
+            <ul id="testugh">
+                <li>    
+                    <div class="dropdown">
+                        <button id="storesDropBtn" class="dropbtn">Stores</button>
+                        <ul id="storesDropDown" class="dropdown-content">
+                          <li class="drop-option">Store1</li>
+                          <li class="drop-option">Store2</li>
+                          <li class="drop-option">Store3</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button id="artDropBtn" class="dropbtn">Art</button>
+                        <ul id="storesDropDown" class="dropdown-content">
+                            <li class="drop-option">Art1</li>
+                            <li class="drop-option">Art2</li>
+                            <li class="drop-option">Art3</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button id="aboutBtn" class="dropbtn">About</button>
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>
 
-    <!--displayed when not logged in-->
-    <div class="not-logged-in">
-        <h1>Here to Shop<br> or Sell?</h1>
-        <div class="button-column">
-            <a href="login.html"><button class="color2-button">Sign Up</button></a>
-            <a href="login.html"><button class="color2-button">Log In</button></a>
-        </div>
-    </div>
-
-    <div class="horizontal-divider-line"></div>
-    
-    <!--displayed when logged in-->
-    <div class="welcome-banner">
-        <h1>Welcome Back</h1>
-        <h1 id="welcome-account">to Tempera!</h1>
-    </div>
-
-    <div class="featured-artist">
-        <h1>Featured<br> Store:</h1>
-        <img class="artist-photo" src="../images/artistTmp.jpeg" alt="comingSoon.jpg">
-        <h1 class="featured-artist-name">Jane Doe</h1>
-    </div>
-
-    <div class="recommended-art">
-        <h1>Recommended Art:</h1>
-        <ul class="art-list">
-            <!--Populate with art-->
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">title---</h3>-->
-                <img src="../images/art1.jpg" alt="errorImg.jpg">
-            </li>
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">title---</h3>-->
-                <img src="../images/art2.jpg" alt="errorImg.jpg">
-            </li>
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">title---</h3>-->
-                <img src="../images/art3.jpg" alt="errorImg.jpg">
-            </li>
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">title---</h3>-->
-                <img src="../images/art4.jpg" alt="errorImg.jpg">
-            </li>
-        </ul>
-    </div>
+    <iframe id="myFrame" src="main.html" onload="iFrameResize.resize();"></iframe>
 
     <footer>
         <nav class="nav-bar">
             <ul>
-                <li><a href="stores.html">Stores</a></li>
-                <li><a href="art.html">Art</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li>    
+                    <div class="dropdown-footer">
+                        <ul id="storesDropDown" class="dropdown-content-footer">
+                            <li class="drop-option">Store1</li>
+                            <li class="drop-option">Store2</li>
+                            <li class="drop-option">Store3</li>
+                        </ul>
+                        <button id="storesDropBtn" class="dropbtn">Stores</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown-footer">
+                        <ul id="artDropDown" class="dropdown-content-footer">
+                            <li class="drop-option">Art1</li>
+                            <li class="drop-option">Art2</li>
+                            <li class="drop-option">Art3</li>
+                        </ul>
+                        <button id="artDropBtn" class="dropbtn">Art</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button id="aboutBtn" class="dropbtn">About</button>
+                    </div>
+                </li>
             </ul>
         </nav>
     </footer>
