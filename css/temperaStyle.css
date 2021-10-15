@@ -60,6 +60,16 @@ nav a{
     height: auto;
     margin: 10px;
 }
+.middle-centered {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .middle-centered:first-child > span { margin-right: auto; }
+  
+  .middle-centered:last-child  > span { margin-left: auto;  }
+  
 
 
 .horizontal-divider-line{
@@ -85,6 +95,9 @@ nav a{
 .art-listing img{
     width: 200px;
     height: 200px;
+}
+.art-price-label, .art-title-label{
+    font-size: 16px;
 }
 
 .color2-button{
@@ -141,4 +154,11 @@ nav a{
     padding-top: 20px;
     align-self: center;
     margin: 30px;
+}
+
+/*specific to artist.html*/
+.artist-photo{
+    border-radius: 50%;
+    height: 275px;
+    width: 275px;
 }

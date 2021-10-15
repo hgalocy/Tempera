@@ -97,11 +97,7 @@ iframe {
     height: 350px;
     color: white;
 }
-.artist-photo{
-    border-radius: 50%;
-    height: 275px;
-    width: 275px;
-}
+
 .featured-artist-name{
     color: var(--primary-color);
 }

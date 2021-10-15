@@ -12,12 +12,14 @@ document.getElementById("account-link").addEventListener("click", function(){
 document.getElementById("favorite-link").addEventListener("click", function(){
     myFrame.src = "favorite.html";
 });
-
-const ban = document.getElementById("testugh")
-myFrame.onLoad = function (){
-    ban.style.backgroundColor = "red";
-
+let artistLinks = document.getElementsByClassName("drop-option");
+for (var i = 0; i<artistLinks.length; i++){
+    artistLinks[i].addEventListener("click", function(){
+        myFrame.src = "artist.html";
+        
+    });
 }
+
 //myFrame.src = "main.html";
 //myFrame.src = "login.html";
 

@@ -1,0 +1,13 @@
+.artist-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px;
+}
+.artist-row{
+    display: flex;
+    flex-direction: row;
+}
+
+  
