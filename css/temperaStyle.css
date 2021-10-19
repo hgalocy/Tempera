@@ -33,6 +33,9 @@ button{
     justify-content: space-between;
     align-items: center;
 }
+.logo{
+    margin-left:50px;
+}
 nav ul{
     display: flex;
     flex-direction: row;
