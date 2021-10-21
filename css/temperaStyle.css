@@ -23,6 +23,14 @@ a{
 button{
     outline: none;
 }
+.content-col{
+    display: flex;
+    flex-direction: column;
+}
+.content-row{
+    display: flex;
+    flex-direction: row;
+}
 .header{
     display: flex;
     flex-direction: column;

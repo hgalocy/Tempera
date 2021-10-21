@@ -1,0 +1,52 @@
+#favorited{
+    width: 45x;
+    height: 45px;
+    margin: 10px;
+    margin-left: 20px;
+}
+#art-photo{
+    width: 55%;
+    height: auto;
+    margin: 10px;
+}
+.art-listing-info{
+    margin:20px;
+}
+.art-listing-info-col2{
+    justify-content: space-evenly;
+    margin-left: 20px;
+}
+.price-section{
+    margin-left:-30px;
+}
+.art-listing-info-col2 h1{
+    margin-top: 20px;
+    font-size: 40px;
+}
+.art-listing-title-row{
+    justify-content: space-between;
+    margin: 0px 20px;
+}
+.art-contact{
+    margin-top: 40px;
+    justify-content: space-around;
+}
+.price-section label{
+    margin: 0px 30px;
+}
+.price-section textarea{
+   width: 400px;
+   height: 100px;
+   border-radius: 5px;
+   background-color: var(--input-color);
+}
+.messaging-section{
+    justify-content: center;
+    align-items: center;
+}
+.color2-button{
+    width:100px;
+    height: 50px;
+    font-size: 20px;
+    margin:30px 0px 0px 115px;
+}

@@ -1,5 +1,4 @@
 /*Specific to main page*/
-
 iframe {
     width: 100%;
 }
@@ -57,11 +56,6 @@ iframe {
     background-color: var(--secondary-color);
     color: white;
 }
-
-
-
-
-
 
 .not-logged-in{
     height: 430px;

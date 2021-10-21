@@ -12,11 +12,17 @@ document.getElementById("account-link").addEventListener("click", function(){
 document.getElementById("favorite-link").addEventListener("click", function(){
     myFrame.src = "favorite.html";
 });
-let artistLinks = document.getElementsByClassName("drop-option");
+let artistLinks = document.getElementsByClassName("store-option");
 for (var i = 0; i<artistLinks.length; i++){
     artistLinks[i].addEventListener("click", function(){
         myFrame.src = "artist.html";
         
+    });
+}
+let artLinks = document.getElementsByClassName("art-option");
+for (var i = 0; i<artLinks.length; i++){
+    artLinks[i].addEventListener("click", function(){
+        myFrame.src = "art.html";
     });
 }
 
