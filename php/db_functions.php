@@ -1,5 +1,6 @@
 <?php
 include 'db_connection.php';
+// TODO: All functions need to be recreated utilizing JSON and POST
 
 /*
  * varchar(40)  : userName, firstName, lastName, email, password

@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="../css/temperaStyle.css">
     <link rel="stylesheet" href="../css/login.css">
     <script src="../node_modules/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+    <script defer src="../js/login.js"></script>
     <title>Tempera</title>
 </head>
 <body>
     <div class="inputting">
-        <div class="login-section">
+        <div class="login-section" id="LoginDiv">
             <h1>Login!</h1>
             <form>
                 <table>
@@ -28,13 +29,14 @@
                 <button class="color1-button" type="submit">Submit</button>
             </form>
         </div>
-        <div class="newLogin-section">
+        <div class="newLogin-section" id="SignUpDiv">
             <h1>Sign Up!</h1>
+
             <form>
                 <table>
                     <tr>
                         <td><label for="newEmail">Email:</label></td>
-                        <td><input type="newEmail" id="newEmail" name="newEmail"></td>
+                        <td><input type="email" id="newEmail" name="newEmail"></td>
                     </tr>
                     <tr>
                         <td><label for="newPassword">Password:</label></td>
@@ -45,23 +47,23 @@
                         <td><input type="text" id="newConPassword" name="newConPassword"></td>
                     </tr>
                     <tr>
-                        <td><label for="userName">Username:</label></td>
-                        <td><input type="text" id="userName" name="userName"></td>
+                        <td><label for="newUsername">Username:</label></td>
+                        <td><input type="text" id="newUsername" name="userName"></td>
                     </tr>
                     <tr>
-                        <td><label for="phoneNum">Phone Number:</label></td>
-                        <td><input type="text" id="phoneNum" name="phoneNum"></td>
+                        <td><label for="newPhoneNum">Phone Number:</label></td>
+                        <td><input type="text" id="newPhoneNum" name="phoneNum"></td>
                     </tr>
                     <tr>
-                        <td><label for="firstName">First Name:</label></td>
-                        <td><input type="text" id="firstName" name="firstName"></td>
+                        <td><label for="newFirstName">First Name:</label></td>
+                        <td><input type="text" id="newFirstName" name="firstName"></td>
                     </tr>
                     <tr>
-                        <td><label for="lastName">Last Name:</label></td>
-                        <td><input type="text" id="lastName" name="lastName"></td>
+                        <td><label for="newLastName">Last Name:</label></td>
+                        <td><input type="text" id="newLastName" name="lastName"></td>
                     </tr>
                 </table>
-                <button class="color1-button" type="submit">Submit</button>
+                <button class="color1-button" id="Submit-New-User" type="submit">Submit</button>
             </form>
         </div>
 

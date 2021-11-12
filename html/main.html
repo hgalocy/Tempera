@@ -8,62 +8,64 @@
     <link rel="stylesheet" href="../css/temperaStyle.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="../node_modules/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+    <script defer src="../js/main.js"></script>
     <title>Tempera</title>
 </head>
 <body>
     <!--displayed when not logged in-->
-    <div class="not-logged-in">
+    <div class="not-logged-in" id="NotLoggedIn">
         <h1>Here to Shop<br> or Sell?</h1>
         <div class="button-column">
-            <a href="login.html"><button class="color2-button">Sign Up</button></a>
-            <a href="login.html"><button class="color2-button">Log In</button></a>
+            <a href="login.html"><button class="color2-button" id="signup_btn">Sign Up</button></a>
+            <a href="login.html"><button class="color2-button" id="login_btn">Log In</button></a>
         </div>
     </div>
 
-    <div class="horizontal-divider-line"></div>
-    
-    <!--displayed when logged in-->
-    <div class="welcome-banner">
-        <h1>Welcome Back</h1>
-        <h1 id="welcome-account">to Tempera!</h1>
-    </div>
+    <div id="LoggedIn">
+        <div class="horizontal-divider-line"></div>
 
-    <div class="featured-artist">
-        <h1>Featured<br> Store:</h1>
-        <img class="artist-photo" src="../images/artistTmp.jpeg" alt="comingSoon.jpg">
-        <h1 class="featured-artist-name">Jane Doe</h1>
-    </div>
+        <!--displayed when logged in-->
+        <div class="welcome-banner">
+            <h1>Welcome Back</h1>
+            <h1 id="greet-user">to Tempera!</h1>
+        </div>
 
-    <div class="recommended-art">
-        <h1>Recommended Art:</h1>
-        <ul class="art-list">
-            <!--Populate with art-->
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
-                <img src="../images/art1.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">---title---</h3>
-            </li>
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
-                <img src="../images/art2.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">---title---</h3>
-            </li>
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
-                <img src="../images/art3.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">---title---</h3>
-            </li>
-            <li class="art-listing"> <!--replace with an artListing object-->
-                <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
-                <img src="../images/art4.jpg" alt="errorImg.jpg">
-                <h3 class="art-price-label">price$$$</h3>
-                <h3 class="art-title-label">---title---</h3>
-            </li>
-        </ul>
+        <div class="featured-artist">
+            <h1>Featured<br> Store:</h1>
+            <img class="artist-photo" src="../images/artistTmp.jpeg" alt="comingSoon.jpg">
+            <h1 class="featured-artist-name">Jane Doe</h1>
+        </div>
+
+        <div class="recommended-art">
+            <h1>Recommended Art:</h1>
+            <ul class="art-list">
+                <!--Populate with art-->
+                <li class="art-listing"> <!--replace with an artListing object-->
+                    <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
+                    <img src="../images/art1.jpg" alt="errorImg.jpg">
+                    <h3 class="art-price-label">price$$$</h3>
+                    <h3 class="art-title-label">---title---</h3>
+                </li>
+                <li class="art-listing"> <!--replace with an artListing object-->
+                    <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
+                    <img src="../images/art2.jpg" alt="errorImg.jpg">
+                    <h3 class="art-price-label">price$$$</h3>
+                    <h3 class="art-title-label">---title---</h3>
+                </li>
+                <li class="art-listing"> <!--replace with an artListing object-->
+                    <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
+                    <img src="../images/art3.jpg" alt="errorImg.jpg">
+                    <h3 class="art-price-label">price$$$</h3>
+                    <h3 class="art-title-label">---title---</h3>
+                </li>
+                <li class="art-listing"> <!--replace with an artListing object-->
+                    <!--<img src="tmpArt.jpg" alt="errorImg.jpg">-->
+                    <img src="../images/art4.jpg" alt="errorImg.jpg">
+                    <h3 class="art-price-label">price$$$</h3>
+                    <h3 class="art-title-label">---title---</h3>
+                </li>
+            </ul>
+        </div>
     </div>
- 
 </body>
 </html>
