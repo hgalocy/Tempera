@@ -1,17 +1,26 @@
 <?php
-include 'db_connection.php';
-// TODO: All functions need to be recreated utilizing JSON and POST
 
-/*
- * varchar(40)  : userName, firstName, lastName, email, password
- * varchar(10)  : phoneNumber
- * varchar(64)  : delivery
- * bool         : isArtist, specPainting, specDigitalPainting, specTextile, specEmbroidery, specPottery, ...
- *                specSculpture
- * text         : bio, location
- * varchar(250) : responseMessage
- * ???          : photo
- */
+// TODO: All functions need to be recreated utilizing JSON and POST
+header('Content-Type: application/json');
+include 'db_connection.php';
+
+if( isset($_POST['functionname'])){
+    if( $_POST['functionname'] == 'AddUser') {
+        $username = $_POST['arguments'][0];
+        $firstname = $_POST['arguments'][1];
+        $lastname = $_POST['arguments'][2];
+        $Email = $_POST['arguments'][3];
+        $phone = $_POST['arguments'][4];
+        $pword = $_POST['arguments'][5];
+
+        AddUser($username, $firstname, $lastname, $Email, $phone, 0, $pword, null,
+            null, null, null, 0, 0, 0, 0, 0,
+            0);
+
+        echo json_encode(array('uAdded' => 'successfully added user'));
+        $_POST = array();
+    }
+}
 
 function AddUser($userName, $firstName, $lastName, $email, $phoneNumber, $isArtist, $password, $delivery, $photo,
 $bio, $location, $specPainting, $specDigitalPainting, $specTextile, $specEmbroidery, $specPottery, $specSculpture)
@@ -26,10 +35,10 @@ $bio, $location, $specPainting, $specDigitalPainting, $specTextile, $specEmbroid
         $specSculpture . ', ' . '@responseMessage);';
 
 
-    echo $inputQuery;
+    //echo $inputQuery;
 
     //Call addUser function, input user data into account table of database
-    //mysqli_query($conn, $inputQuery);
+    mysqli_query($conn, $inputQuery);
 
     CloseConnect($conn);
 }
