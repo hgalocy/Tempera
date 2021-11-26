@@ -4,7 +4,23 @@ script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+let loginDiv = document.getElementById("LoginDiv");
+let signUpDiv = document.getElementById("SignUpDiv");
+
 let newUserBtn = document.getElementById("Submit-New-User");
+let loginBtn = document.getElementById("Submit-Login");
+
+switch(sessionStorage.getItem("LoginSignup")){
+    case "Login":
+        signUpDiv.style.display = "none";
+        loginDiv.style.display = "flex";
+        break;
+
+    case "Signup":
+        signUpDiv.style.display = "flex";
+        loginDiv.style.display = "none";
+        break;
+}
 
 newUserBtn.addEventListener("click", () => {
     let newUsername = document.getElementById("newUsername");
@@ -22,6 +38,8 @@ newUserBtn.addEventListener("click", () => {
                 newPhone.value, newPass.value]
         });
 
+        localStorage.setItem('Username', newUsername.value);
+
         newUsername.value = "";
         newFirstName.value = "";
         newPass.value = "";
@@ -30,7 +48,19 @@ newUserBtn.addEventListener("click", () => {
         newConPass.value = "";
         newLastName.value = "";
 
+        //document.location.href = '../html/main.html';
+
     } else {
         //TODO: Add error message for password and confirmation password matching
     }
+});
+
+loginBtn.addEventListener("click", () =>{
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+
+    $.post('../php/db_functions.php',{
+        functionname: 'Login',
+        arguments: [email.value, password.value]
+    });
 });

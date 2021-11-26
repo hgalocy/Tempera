@@ -4,14 +4,12 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
-//localStorage.setItem('Username', 'Bob');
-
-const divOne = document.getElementById("NotLoggedIn");
-const divTwo = document.getElementsByClassName("welcome-banner")[0];
-const welcomeAccount = document.getElementById("greet-user");
-const currentUsername = localStorage.getItem('Username');
-
-localStorage.clear();
+let divOne = document.getElementById("NotLoggedIn");
+let divTwo = document.getElementsByClassName("welcome-banner")[0];
+let welcomeAccount = document.getElementById("greet-user");
+let currentUsername = localStorage.getItem('Username');
+let loginBtn = document.getElementById("login_btn");
+let signUpBtn = document.getElementById("signup_btn");
 
 if(currentUsername != null) {
     //Run this if the person is logged in
@@ -23,3 +21,11 @@ if(currentUsername != null) {
     divOne.style.display = "flex";
     divTwo.style.display = "none";
 }
+
+loginBtn.addEventListener("click", () => {
+    sessionStorage.setItem("LoginSignup", "Login");
+});
+
+signUpBtn.addEventListener("click", () => {
+    sessionStorage.setItem("LoginSignup", "Signup");
+});

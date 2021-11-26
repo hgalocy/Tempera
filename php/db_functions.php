@@ -5,20 +5,26 @@ header('Content-Type: application/json');
 include 'db_connection.php';
 
 if( isset($_POST['functionname'])){
-    if( $_POST['functionname'] == 'AddUser') {
-        $username = $_POST['arguments'][0];
-        $firstname = $_POST['arguments'][1];
-        $lastname = $_POST['arguments'][2];
-        $Email = $_POST['arguments'][3];
-        $phone = $_POST['arguments'][4];
-        $pword = $_POST['arguments'][5];
+    switch($_POST['functionname']){
+        case "AddUser":
+            $username = $_POST['arguments'][0];
+            $firstname = $_POST['arguments'][1];
+            $lastname = $_POST['arguments'][2];
+            $Email = $_POST['arguments'][3];
+            $phone = $_POST['arguments'][4];
+            $pword = $_POST['arguments'][5];
 
-        AddUser($username, $firstname, $lastname, $Email, $phone, 0, $pword, null,
-            null, null, null, 0, 0, 0, 0, 0,
-            0);
+            AddUser($username, $firstname, $lastname, $Email, $phone, 0, $pword, null,
+                null, null, null, 0, 0, 0, 0, 0,
+                0);
 
-        echo json_encode(array('uAdded' => 'successfully added user'));
-        $_POST = array();
+            echo json_encode(array('uAdded' => 'successfully added user'));
+            $_POST = array();
+            break;
+
+        case "Login":
+            $email = $_POST['arguments'][0];
+            $password = $_POST['arguments'][1];
     }
 }
 
@@ -69,7 +75,7 @@ function AddItem( $itemName, $itemDescription, $painting, $digitalPainting, $pot
 
    mysqli_query($conn, $inputQuery);
 
-    CloseConnect($conn, $inputQuery);
+    CloseConnect($conn);
 }
 
 ?>
