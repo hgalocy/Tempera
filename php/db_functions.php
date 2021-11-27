@@ -25,8 +25,31 @@ if( isset($_POST['functionname'])){
         case "Login":
             $email = $_POST['arguments'][0];
             $password = $_POST['arguments'][1];
+            $username = LogIn($email, $password);
+            echo json_encode(array('uFound' => $username));
+            $_POST = array();
+            break;
     }
 }
+
+function LogIn($email, $password){
+    $conn = Connect();
+
+    $inputQuery = "SELECT Username\n" .
+        "FROM tempera.account\n" .
+        "WHERE Email = \"" . $email . "\" AND PasswordHash = SHA2(CONCAT(\"" . $password . "\", CAST(salt AS CHAR(40))), 512);";
+
+    $results = $conn->query($inputQuery);
+    CloseConnect($conn);
+
+    if($results->num_rows > 0) {
+         return $results->fetch_assoc()["Username"];
+    } else
+    {
+        return "No account found.";
+    }
+}
+
 
 function AddUser($userName, $firstName, $lastName, $email, $phoneNumber, $isArtist, $password, $delivery, $photo,
 $bio, $location, $specPainting, $specDigitalPainting, $specTextile, $specEmbroidery, $specPottery, $specSculpture)
