@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="../css/temperaStyle.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <script src="../node_modules/iframe-resizer/js/iframeResizer.min.js"></script>
-    <script defer src="../js/index.js"></script>
+    <link rel="stylesheet" href="css/temperaStyle.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="node_modules/iframe-resizer/js/iframeResizer.min.js"></script>
+    <script defer src="js/index.js"></script>
     <title>Tempera</title>
 </head>
 <body>
@@ -18,11 +18,11 @@
             <div class="hidden-placeholder"></div>
             <div class="logo">
                 <!--put logo here-->
-                <a href="index.html"><h1>Tempera</h1></a>
+                <a href="index.html" id="MainPage"><h1>Tempera</h1></a>
             </div>
             <div class="user-icons">
-                <img id="favorite-link" src="../images/favorite.png">
-                <img id="account-link" src="../images/account.png">
+                <img id="favorite-link" src="images/favorite.png">
+                <img id="account-link" src="images/account.png">
             </div>
         </div>
         <nav class="nav-bar">
@@ -56,7 +56,7 @@
         </nav>
     </div>
 
-    <iframe id="myFrame" src="main.html" onload="iFrameResize.resize();"></iframe>
+    <iframe id="myFrame" src="html/main.html" onload="iFrameResize.resize();"></iframe>
 
     <footer>
         <nav class="nav-bar">
