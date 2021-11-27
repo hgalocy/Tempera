@@ -26,7 +26,7 @@ if( isset($_POST['functionname'])){
             $email = $_POST['arguments'][0];
             $password = $_POST['arguments'][1];
             $username = LogIn($email, $password);
-            echo json_encode(array('uFound' => $username));
+            echo json_encode(array('result' => $username));
             $_POST = array();
             break;
     }

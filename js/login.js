@@ -38,7 +38,7 @@ newUserBtn.addEventListener("click", () => {
                 newPhone.value, newPass.value]
         });
 
-        localStorage.setItem('Username', newUsername.value);
+        localStorage.setItem('Username', String(newUsername.value));
 
         newUsername.value = "";
         newFirstName.value = "";
@@ -59,8 +59,21 @@ loginBtn.addEventListener("click", () =>{
     let email = document.getElementById("email");
     let password = document.getElementById("password");
 
-    $.post('../php/db_functions.php',{
-        functionname: 'Login',
-        arguments: [email.value, password.value]
+    jQuery.ajax({
+        url: '../php/db_functions.php',
+        dataType: 'json',
+        type: "post",
+        data: {functionname: 'Login', arguments: [email.value, password.value]},
+        success: function(obj, textstatus){
+            if(!(obj.result === 'No account found.')){
+                localStorage.setItem('Username', String(obj.result));
+                email.value = "";
+                password.value = "";
+                window.location = '../html/main.html';
+            } else {
+                //TODO: Alert user that input cannot be found in database
+            }
+        }
     });
+
 });

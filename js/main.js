@@ -7,11 +7,10 @@ document.getElementsByTagName('head')[0].appendChild(script);
 let divOne = document.getElementById("NotLoggedIn");
 let divTwo = document.getElementsByClassName("welcome-banner")[0];
 let welcomeAccount = document.getElementById("greet-user");
-let currentUsername = localStorage.getItem('Username');
 let loginBtn = document.getElementById("login_btn");
 let signUpBtn = document.getElementById("signup_btn");
 
-if(currentUsername != null) {
+if(localStorage.getItem('Username') != null) {
     //Run this if the person is logged in
     divOne.style.display = "none";
     divTwo.style.display = "flex";
