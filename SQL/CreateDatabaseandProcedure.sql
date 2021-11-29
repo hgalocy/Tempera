@@ -89,19 +89,19 @@ CREATE PROCEDURE `addUser`(
     IN pSpecPainting tinyint(1),
     IN pSpecDigitalPainting tinyint(1),
     IN pSpecTextile tinyint(1),
-    IN pSpecEmbroidery tinyint(1), 
+    IN pSpecEmbroidery tinyint(1),
     IN pSpecPottery tinyint(1),
     IN pSpecSculpture tinyint(1),
     OUT responseMessage varchar(250)
     )
 BEGIN
-    
+
     DECLARE salt VARCHAR(64);
     DECLARE userID VARCHAR(64);
-    
+
     SET salt = UUID();
     SET userID = UUID();
-    
+
     INSERT INTO tempera.account (Username, FirstName, LastName, Email, IsArtist, Salt,
     UserID, PasswordHash, Delivery, Photo, Bio, Location, SpecPainting, SpecDigitalPainting,
     SpecTextile, SpecEmbroidery, SpecPottery, SpecSculpture, PhoneNumber)
@@ -109,7 +109,7 @@ BEGIN
     SHA2(CONCAT( pPassword, CAST(salt AS CHAR(40))), 512),
     pDelivery, pPhoto, pBio, @pLocation, pSpecPainting, pSpecDigitalPainting, pSpecTextile,
     pSpecEmbroidery, pSpecPottery, pSpecSculpture, pPhoneNumber);
-    
+
 END
 
 
@@ -134,14 +134,14 @@ BEGIN
 
     DECLARE itemID VARCHAR(64);
     DECLARE pUserID VARCHAR(64);
-    
+
     SELECT UserID INTO pUserID FROM tempera.account WHERE Username = pUsername AND PasswordHash = SHA2(CONCAT( pPassword, CAST(salt AS CHAR(40))), 512);
-    
+
     SET itemID = UUID();
-    
+
     INSERT INTO tempera.items (ItemName, ItemDescription, Painting, DigitalPainting, Pottery,
     Textile, Sculpture, Embroidery, Image, Price, SoldOut, ItemID, ArtistID_fk)
     VALUES (pItemName, pItemDescription, pPainting, pDigitalPainting, pPottery,
     pTextile, pSculpture, pEmbroidery, pImage, pPrice, pSoldOut, itemID, pUserID);
-    
+
 END

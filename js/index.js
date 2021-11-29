@@ -6,7 +6,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 //adjust iframe size dynamically
 let options = {
-    log: true,
+    log: false,
     autoResize: true,
 }
 iFrameResize( options, '#myFrame' );
@@ -32,4 +32,17 @@ for (var i = 0; i<artLinks.length; i++){
     artLinks[i].addEventListener("click", function(){
         myFrame.src = "html/art.html";
     });
+<<<<<<< HEAD
 }
+=======
+}
+
+//myFrame.src = "main.html";
+//myFrame.src = "login.html";
+
+//logout btn
+logOutBtn.addEventListener("click", function(){
+    localStorage.clear();
+})
+
+>>>>>>> 2773af437b7797639506c288bf73a444e109da18
