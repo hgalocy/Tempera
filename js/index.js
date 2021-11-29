@@ -8,7 +8,7 @@ localStorage.clear();
 
 //adjust iframe size dynamically
 let options = {
-    log: true,
+    log: false,
     autoResize: true,
 }
 iFrameResize( options, '#myFrame' );
@@ -37,4 +37,8 @@ for (var i = 0; i<artLinks.length; i++){
 //myFrame.src = "main.html";
 //myFrame.src = "login.html";
 
+//logout btn
+logOutBtn.addEventListener("click", function(){
+    localStorage.clear();
+})
 
