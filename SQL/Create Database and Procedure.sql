@@ -1,7 +1,9 @@
 CREATE database tempera;
 
+USING tempera;
+
 /*Create Account Table*/
-account, CREATE TABLE `account` (
+CREATE TABLE `account` (
   `Username` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `FirstName` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `LastName` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -24,10 +26,10 @@ account, CREATE TABLE `account` (
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `SK_Email` (`Email`),
   UNIQUE KEY `SK_Username` (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+)
 
 /*Create Items Table*/
-items, CREATE TABLE `items` (
+CREATE TABLE `items` (
   `ItemID` varchar(64) NOT NULL,
   `ItemName` varchar(20) NOT NULL,
   `ItemDescription` tinytext,
@@ -44,22 +46,22 @@ items, CREATE TABLE `items` (
   PRIMARY KEY (`ItemID`),
   KEY `Artist` (`ArtistID_fk`),
   CONSTRAINT `Artist` FOREIGN KEY (`ArtistID_fk`) REFERENCES `account` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+)
 
 
 /*Ceate Favorites Table*/
-favorites, CREATE TABLE `favorites` (
+CREATE TABLE `favorites` (
   `UserID_fk` varchar(64) NOT NULL,
   `ItemID_fk` varchar(64) NOT NULL,
   KEY `UserID_fk` (`UserID_fk`),
   KEY `FK_Item` (`ItemID_fk`),
   CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`UserID_fk`) REFERENCES `account` (`UserID`),
   CONSTRAINT `FK_Item` FOREIGN KEY (`ItemID_fk`) REFERENCES `items` (`ItemID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+)
 
 
 /*Create Review Table*/
-reviews, CREATE TABLE `reviews` (
+CREATE TABLE `reviews` (
   `ReviewText` text,
   `ReviewDate` timestamp NOT NULL,
   `ReviewRating` enum('1','2','3','4','5') NOT NULL,
@@ -69,10 +71,10 @@ reviews, CREATE TABLE `reviews` (
   KEY `ItemID_fk` (`ItemID_fk`),
   CONSTRAINT `ItemID_fk` FOREIGN KEY (`ItemID_fk`) REFERENCES `items` (`ItemID`),
   CONSTRAINT `Reviewer` FOREIGN KEY (`ReviewerID_fk`) REFERENCES `account` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+)
 
 /*Create AddUser Procedure*/
-addUser, STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION, CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(
+CREATE PROCEDURE `addUser`(
     IN pUsername varchar(40),
     IN pFirstName varchar(40),
     IN pLastName varchar(40),
@@ -108,11 +110,11 @@ BEGIN
     pDelivery, pPhoto, pBio, @pLocation, pSpecPainting, pSpecDigitalPainting, pSpecTextile,
     pSpecEmbroidery, pSpecPottery, pSpecSculpture, pPhoneNumber);
     
-END, utf8mb4, utf8mb4_0900_ai_ci, utf8mb4_0900_ai_ci
+END
 
 
 /*Create AddItem Procedure*/
-addItem, STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION, CREATE DEFINER=`root`@`localhost` PROCEDURE `addItem`(
+CREATE PROCEDURE `addItem`(
     IN pItemName varchar(20),
     IN pItemDescription Text,
     IN pPainting tinyint(1),
@@ -142,4 +144,4 @@ BEGIN
     VALUES (pItemName, pItemDescription, pPainting, pDigitalPainting, pPottery,
     pTextile, pSculpture, pEmbroidery, pImage, pPrice, pSoldOut, itemID, pUserID);
     
-END, utf8mb4, utf8mb4_0900_ai_ci, utf8mb4_0900_ai_ci
+END

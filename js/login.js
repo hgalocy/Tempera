@@ -64,9 +64,12 @@ loginBtn.addEventListener("click", () =>{
         dataType: 'json',
         type: "post",
         data: {functionname: 'Login', arguments: [email.value, password.value]},
-        success: function(obj, textstatus){
-            if(!(obj.result === 'No account found.')){
-                localStorage.setItem('Username', String(obj.result));
+        success: function(response){
+            if(!(response.result === 'No account found.')){
+                var data = response.result.split(",");
+                localStorage.setItem('Username', String(data[0]));
+                localStorage.setItem('IsArtist', String(data[1]));
+
                 email.value = "";
                 password.value = "";
                 window.location = '../html/main.html';

@@ -25,8 +25,8 @@ if( isset($_POST['functionname'])){
         case "Login":
             $email = $_POST['arguments'][0];
             $password = $_POST['arguments'][1];
-            $username = LogIn($email, $password);
-            echo json_encode(array('result' => $username));
+            [$username, $isArtist] = LogIn($email, $password);
+            echo json_encode(array('result' => $username . "," . $isArtist));
             $_POST = array();
             break;
     }
@@ -35,7 +35,7 @@ if( isset($_POST['functionname'])){
 function LogIn($email, $password){
     $conn = Connect();
 
-    $inputQuery = "SELECT Username\n" .
+    $inputQuery = "SELECT Username, IsArtist\n" .
         "FROM tempera.account\n" .
         "WHERE Email = \"" . $email . "\" AND PasswordHash = SHA2(CONCAT(\"" . $password . "\", CAST(salt AS CHAR(40))), 512);";
 
@@ -43,7 +43,8 @@ function LogIn($email, $password){
     CloseConnect($conn);
 
     if($results->num_rows > 0) {
-         return $results->fetch_assoc()["Username"];
+        $result = $results->fetch_assoc();
+        return [$result["Username"], $result["IsArtist"]];
     } else
     {
         return "No account found.";
