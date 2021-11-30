@@ -3,6 +3,7 @@ var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
+let logOutBtn = document.getElementById("logoutBtn");
 
 //adjust iframe size dynamically
 let options = {
@@ -15,7 +16,6 @@ const myFrame = document.getElementById('myFrame');
 document.getElementById("account-link").addEventListener("click", function(){
     myFrame.src = "html/account.html";
     //FIXME: Move "localStorage.clear()" function to logout button when its created
-    localStorage.clear();
 });
 document.getElementById("favorite-link").addEventListener("click", function(){
     myFrame.src = "html/favorite.html";
@@ -32,9 +32,6 @@ for (var i = 0; i<artLinks.length; i++){
     artLinks[i].addEventListener("click", function(){
         myFrame.src = "html/art.html";
     });
-<<<<<<< HEAD
-}
-=======
 }
 
 //myFrame.src = "main.html";
@@ -43,6 +40,5 @@ for (var i = 0; i<artLinks.length; i++){
 //logout btn
 logOutBtn.addEventListener("click", function(){
     localStorage.clear();
+    myFrame.src = '../html/main.html';
 })
-
->>>>>>> 2773af437b7797639506c288bf73a444e109da18
