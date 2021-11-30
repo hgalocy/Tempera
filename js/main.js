@@ -4,6 +4,8 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+let ftrddArtistPic = document.getElementById("featured-account-pic");
+let ftrdArtistUName = document.getElementById("featured-account-username");
 let divOne = document.getElementById("NotLoggedIn");
 let divTwo = document.getElementsByClassName("welcome-banner")[0];
 let welcomeAccount = document.getElementById("greet-user");
@@ -28,3 +30,20 @@ loginBtn.addEventListener("click", () => {
 signUpBtn.addEventListener("click", () => {
     sessionStorage.setItem("LoginSignup", "Signup");
 });
+
+window.onload = function() {
+    jQuery.ajax({
+        url: '../php/db_functions.php',
+        dataType: 'json',
+        type: 'post',
+        data: {functionname: 'Get-Featured-Artist'},
+        success: function (response) {
+            if (!(response.result === 'No current artists.')) {
+                var data = response.result.split(",");
+                ftrdArtistUName.textContent = String(data[0]);
+                ftrddArtistPic.src = String(data[1]);
+            }
+        }
+
+    });
+};

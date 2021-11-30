@@ -26,10 +26,32 @@ if( isset($_POST['functionname'])){
             $email = $_POST['arguments'][0];
             $password = $_POST['arguments'][1];
             [$username, $isArtist] = LogIn($email, $password);
+            cookieCreator('username', $username);
+            cookieCreator('artist', $isArtist);
             echo json_encode(array('result' => $username . "," . $isArtist));
             $_POST = array();
             break;
+
+        case "Get-Featured-Artist":
+            [$username, $photo] = GetFeaturedArtist();
+            echo json_encode(array('result' => $username . "," . $photo));
+            break;
     }
+}
+
+function cookieCreator( $name, $data ){
+    $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+    setcookie($name, $data, [
+        'expires' => 2147483647,
+        'path' =>'/',
+        'domain'=> $domain,
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Strict']);
+}
+
+function cookieDeleter($name){
+    setcookie($name, "", time()-3600, '/');
 }
 
 function LogIn($email, $password){
@@ -51,6 +73,26 @@ function LogIn($email, $password){
     }
 }
 
+function GetFeaturedArtist(){
+    $conn = Connect();
+
+    $inputQuery = "SELECT Username, Photo\n" .
+    "FROM tempera.account\n" .
+    "WHERE IsArtist = 1\n" .
+    "ORDER BY RAND()\n" .
+    "LIMIT 1;";
+
+    $results = $conn -> query($inputQuery);
+
+    CloseConnect($conn);
+
+    if($results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["Username"], $result["Photo"]];
+    } else {
+        return "No current artists.";
+    }
+}
 
 function AddUser($userName, $firstName, $lastName, $email, $phoneNumber, $isArtist, $password, $delivery, $photo,
 $bio, $location, $specPainting, $specDigitalPainting, $specTextile, $specEmbroidery, $specPottery, $specSculpture)
@@ -64,10 +106,6 @@ $bio, $location, $specPainting, $specDigitalPainting, $specTextile, $specEmbroid
         $specDigitalPainting . ', ' . $specTextile . ', ' . $specEmbroidery . ', ' . $specPottery . ', ' .
         $specSculpture . ', ' . '@responseMessage);';
 
-
-    //echo $inputQuery;
-
-    //Call addUser function, input user data into account table of database
     mysqli_query($conn, $inputQuery);
 
     CloseConnect($conn);
