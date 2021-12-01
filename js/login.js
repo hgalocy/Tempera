@@ -38,7 +38,7 @@ newUserBtn.addEventListener("click", () => {
                 newPhone.value, newPass.value]
         });
 
-        localStorage.setItem('Username', newUsername.value);
+        localStorage.setItem('Username', String(newUsername.value));
 
         newUsername.value = "";
         newFirstName.value = "";
@@ -48,7 +48,7 @@ newUserBtn.addEventListener("click", () => {
         newConPass.value = "";
         newLastName.value = "";
 
-        //document.location.href = '../html/main.html';
+        document.location.href = '../html/main.html';
 
     } else {
         //TODO: Add error message for password and confirmation password matching
@@ -59,8 +59,24 @@ loginBtn.addEventListener("click", () =>{
     let email = document.getElementById("email");
     let password = document.getElementById("password");
 
-    $.post('../php/db_functions.php',{
-        functionname: 'Login',
-        arguments: [email.value, password.value]
+    jQuery.ajax({
+        url: '../php/db_functions.php',
+        dataType: 'json',
+        type: "post",
+        data: {functionname: 'Login', arguments: [email.value, password.value]},
+        success: function(response){
+            if(!(response.result === 'No account found.')){
+                var data = response.result.split(",");
+                localStorage.setItem('Username', String(data[0]));
+                localStorage.setItem('IsArtist', String(data[1]));
+
+                email.value = "";
+                password.value = "";
+                window.location = '../html/main.html';
+            } else {
+                //TODO: Alert user that input cannot be found in database
+            }
+        }
     });
+
 });

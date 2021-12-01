@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="../css/temperaStyle.css">
     <link rel="stylesheet" href="../css/account.css">
     <script src="../node_modules/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script defer src = "../js/account.js"></script>
     <title>Tempera</title>
 </head>
 <body>
     <div class="inputting">
-        <div class="account-settings">
+        <div class="account-settings" id="basic-account">
             <h1>Account Settings</h1>
             <form>
                 <table>
@@ -40,7 +42,7 @@
                 <button class="color1-button" type="submit">Submit</button>
             </form>
         </div>
-        <div class="artist-settings">
+        <div class="artist-settings" id="artist-account">
             <h1>Artist Settings</h1>
             <form>
                 <table>
