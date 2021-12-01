@@ -12,6 +12,10 @@ let welcomeAccount = document.getElementById("greet-user");
 let loginBtn = document.getElementById("login_btn");
 let signUpBtn = document.getElementById("signup_btn");
 
+let featuredArtTitle = document.getElementsByClassName('art-title-label');
+let featuredArtPrice = document.getElementsByClassName('art-price-label');
+let featuredArtImg = document.getElementsByClassName('art-listing-img');
+
 if(localStorage.getItem('Username') != null) {
     //Run this if the person is logged in
     divOne.style.display = "none";
@@ -44,6 +48,26 @@ window.onload = function() {
                 ftrddArtistPic.src = String(data[1]);
             }
         }
-
     });
+
+    for( var i = 0; i < featuredArtTitle.length; i++){
+        (function(e) {
+            jQuery.ajax({
+                url: '../php/db_functions.php',
+                dataType: 'json',
+                type: 'post',
+                data: {functionname: 'Get-Featured-Artwork'},
+                success: function (response) {
+                    if (!(response.result === 'No items uploaded to website.')) {
+                        var data = response.result.split(",");
+                        featuredArtTitle[e].textContent = String(data[0]);
+                        var priceString = "$".concat(String(data[1]));
+                        featuredArtPrice[e].textContent = priceString;
+                        featuredArtImg[e].src = String(data[2]);
+                    }
+                }
+            });
+        })(i);
+    }
+
 };

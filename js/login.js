@@ -48,7 +48,7 @@ newUserBtn.addEventListener("click", () => {
         newConPass.value = "";
         newLastName.value = "";
 
-        //document.location.href = '../html/main.html';
+        document.location.href = '../html/main.html';
 
     } else {
         //TODO: Add error message for password and confirmation password matching

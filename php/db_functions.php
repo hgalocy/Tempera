@@ -36,6 +36,11 @@ if( isset($_POST['functionname'])){
             [$username, $photo] = GetFeaturedArtist();
             echo json_encode(array('result' => $username . "," . $photo));
             break;
+
+        case "Get-Featured-Artwork":
+            [$itemName, $price, $image] = GetFeaturedArtwork();
+            echo json_encode(array('result' => $itemName . ","  . $price . "," . $image));
+            break;
     }
 }
 
@@ -92,6 +97,27 @@ function GetFeaturedArtist(){
     } else {
         return "No current artists.";
     }
+}
+
+function GetFeaturedArtwork(){
+    $conn = Connect();
+
+    $inputQuery = "SELECT ItemName, Price, Image\n" .
+        "FROM tempera.items\n" .
+        "ORDER BY RAND()\n" .
+        "LIMIT 1;";
+
+    $results = $conn -> query($inputQuery);
+
+    CloseConnect($conn);
+
+    if($results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["ItemName"], $result["Price"], $result["Image"]];
+    } else {
+        return "No items uploaded to website";
+    }
+
 }
 
 function AddUser($userName, $firstName, $lastName, $email, $phoneNumber, $isArtist, $password, $delivery, $photo,
