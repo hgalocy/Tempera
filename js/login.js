@@ -53,7 +53,7 @@ newUserBtn.addEventListener("click", () => {
             document.location.href = '../html/main.html';
     
         } else {
-            post("Password and confirmation password must match!")
+            alertTop("Password and confirmation password must match!")
         }
     }
 });
@@ -77,7 +77,7 @@ loginBtn.addEventListener("click", () =>{
                 password.value = "";
                 window.location = '../html/main.html';
             } else {
-                post("Invalid Login Credentials")
+                alertTop("Invalid Login Credentials")
             }
         }
     });
@@ -91,7 +91,7 @@ function ValidateEmail(mail)
   {
     return (true)
   }
-  post("You have entered an invalid email address!")
+  alertTop("You have entered an invalid email address!")
     return (false)
 }
 function ValidatePhoneNumber(number)
@@ -101,7 +101,7 @@ function ValidatePhoneNumber(number)
     return true;
   }
   else{
-    post("You have entered an invalid phone number!")
+    alertTop("You have entered an invalid phone number!")
     return false;
   }
 }
@@ -114,7 +114,7 @@ function emptyFields(){
         }
     }
     if(emptyFlag){
-        post("Fill out all fields!")
+        alertTop("Fill out all fields!")
         return 0;
     }
     else{
@@ -131,6 +131,6 @@ for (let i = 0; i < inputs.length; i += 1) {
     });
 }
 //communicates with index.js to alert()
-function post(mess){
+function alertTop(mess){
     window.parent.postMessage("from iframe:" + mess, '*');
 }
