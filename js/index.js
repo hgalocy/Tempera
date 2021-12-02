@@ -7,7 +7,6 @@ let logOutBtn = document.getElementById("logoutBtn");
 
 //adjust iframe size dynamically
 let options = {
-    log: false,
     autoResize: true,
 }
 iFrameResize( options, '#myFrame' );
@@ -42,3 +41,14 @@ logOutBtn.addEventListener("click", function(){
     localStorage.clear();
     myFrame.src = '../html/main.html';
 })
+
+
+
+//iframe messaging
+window.addEventListener('message', function (e) {
+    // Get the sent data
+    const data = e.data;
+    if (data.substring(0, 12) == "from iframe:"){
+        alert(data.substring(12))
+    }
+});

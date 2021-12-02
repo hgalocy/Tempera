@@ -15,3 +15,34 @@ switch (localStorage.getItem("IsArtist")){
         divArtist.style.display = "none";
         break;
 }
+
+//handle artist button
+window.onload = function(){
+    //TODO: grab from datbase to set localStorage.setItem('artist', '');
+    console.log("executed")
+    if(localStorage.getItem('artist') == 'false'){ //flip to non artist
+        artistBtn.style.backgroundColor = "gray";
+        artistBtn.innerHTML="Not Artist"
+    }
+    else{ //flip to artist
+        artistBtn.style.backgroundColor = "var(--secondary-color";
+        artistBtn.innerHTML="Artist"
+    }
+}
+let artistBtn = document.getElementById("artistBtn");
+artistBtn.addEventListener("click", function(){
+    if(localStorage.getItem('artist') == 'true'){ //flip to non artist
+        artistBtn.style.backgroundColor = "gray";
+        artistBtn.innerHTML="Not Artist"
+        localStorage.setItem('artist', 'false');
+        //TODO: set database artist value
+        //TODO: hide artist options
+    }
+    else{ //flip to artist
+        artistBtn.style.backgroundColor = "var(--secondary-color";
+        artistBtn.innerHTML="Artist"
+        localStorage.setItem('artist', 'true');
+        //TODO: set database artist value
+        //TODO: show artist options
+    }
+})
