@@ -95,3 +95,13 @@ iframe {
 .featured-artist-name{
     color: var(--primary-color);
 }
+#tempera-logo{
+    width: auto;
+    height: 150px;
+}
+
+.title-space{
+    margin-top: 20px;
+    display: flex;
+    align-content: flex-end;
+}

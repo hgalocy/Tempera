@@ -1,6 +1,6 @@
 :root {
     --primary-color: #B1F1ED;
-    --secondary-color: #793F3F;
+    --secondary-color: #d67e63;
     --background-color: #FFF;
     --input-color: rgb(196, 196, 196);
 }
@@ -41,9 +41,7 @@ button{
     justify-content: space-between;
     align-items: center;
 }
-.logo{
-    margin-left:50px;
-}
+
 nav ul{
     display: flex;
     flex-direction: row;
@@ -59,8 +57,7 @@ nav a{
     font-size: 20px;
 }
 .hidden-placeholder{
-    margin: 10px;
-    width: 30px;
+    width: 140px;
 }
 .title-space{
     height: 150px;
