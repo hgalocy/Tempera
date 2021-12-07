@@ -42,10 +42,21 @@ if( isset($_POST['functionname'])){
             echo json_encode(array('result' => $itemName . ","  . $price . "," . $image));
             break;
 
+        case "Get-Item":
+            $itemName = $_POST['arguments'];
+            [$itemDesc, $itemPrice, $itemImg] = GetItemDetails($itemName);
+            echo json_encode(array('result' => $itemDesc . "," . $itemPrice . "," . $itemImg));
+            break;
+
         case "Set-IsArtist":
             $username = $_POST['arguments'][0];
             $value = $_POST['arguments'][1];
             IsArtist($username, $value);
+            break;
+
+        case "Get-Artwork-Title":
+            $itemName = GetArtworkTitle();
+            echo json_encode(array('result' => $itemName));
             break;
     }
 }
@@ -91,6 +102,23 @@ function LogIn($email, $password){
     }
 }
 
+function GetItemDetails($itemName){
+    $inputQuery = "SELECT ItemDescription, Price, Image\n" .
+        "FROM tempera.items\n" .
+        "WHERE ItemName = \"" . $itemName . "\";";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["ItemDescription"], $result["Price"], $result["Image"]];
+    } else {
+        return "Item not found.";
+    }
+}
+
 function GetFeaturedArtist(){
     $conn = Connect();
 
@@ -131,6 +159,24 @@ function GetFeaturedArtwork(){
         return "No items uploaded to website";
     }
 
+}
+
+function GetArtworkTitle(){
+    $inputQuery = "SELECT ItemName\n" .
+        "FROM tempera.items\n" .
+        "ORDER BY RAND()\n" .
+        "LIMIT 1;";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if($results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["ItemName"]];
+    } else {
+        return "No items uploaded to website.";
+    }
 }
 
 function AddUser($userName, $firstName, $lastName, $email, $phoneNumber, $isArtist, $password, $delivery, $photo,
