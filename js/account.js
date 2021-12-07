@@ -18,31 +18,39 @@ switch (localStorage.getItem("IsArtist")){
 
 //handle artist button
 window.onload = function(){
-    //TODO: grab from datbase to set localStorage.setItem('artist', '');
+
     console.log("executed")
-    if(localStorage.getItem('artist') == 'false'){ //flip to non artist
+    if(localStorage.getItem("IsArtist") === "0"){ //flip to non artist
         artistBtn.style.backgroundColor = "gray";
         artistBtn.innerHTML="Not Artist"
+
+        $.post('../php/db_functions.php', {
+            functionname: 'Set-IsArtist',
+            arguments: [localStorage.getItem("Username"), "0"]
+        });
     }
     else{ //flip to artist
         artistBtn.style.backgroundColor = "var(--secondary-color";
         artistBtn.innerHTML="Artist"
+        $.post('../php/db_functions.php', {
+            functionname: 'Set-IsArtist',
+            arguments: [localStorage.getItem("Username"), "1"]
+        });
     }
 }
+
 let artistBtn = document.getElementById("artistBtn");
 artistBtn.addEventListener("click", function(){
-    if(localStorage.getItem('artist') == 'true'){ //flip to non artist
+    if(localStorage.getItem("IsArtist") === '1'){ //flip to non artist
         artistBtn.style.backgroundColor = "gray";
         artistBtn.innerHTML="Not Artist"
-        localStorage.setItem('artist', 'false');
-        //TODO: set database artist value
-        //TODO: hide artist options
+        localStorage.setItem("IsArtist", "0");
+        divArtist.style.display = "none";
     }
     else{ //flip to artist
         artistBtn.style.backgroundColor = "var(--secondary-color";
         artistBtn.innerHTML="Artist"
-        localStorage.setItem('artist', 'true');
-        //TODO: set database artist value
-        //TODO: show artist options
+        localStorage.setItem("IsArtist", '1');
+        divArtist.style.display = "flex";
     }
 })

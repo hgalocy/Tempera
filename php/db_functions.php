@@ -41,7 +41,20 @@ if( isset($_POST['functionname'])){
             [$itemName, $price, $image] = GetFeaturedArtwork();
             echo json_encode(array('result' => $itemName . ","  . $price . "," . $image));
             break;
+
+        case "Set-IsArtist":
+            $username = $_POST['arguments'][0];
+            $value = $_POST['arguments'][1];
+            IsArtist($username, $value);
+            break;
     }
+}
+
+function IsArtist($username, $value){
+    $inputQuery = "CALL tempera.setIsArtist(\"" . $username . "\", " . $value . ");";
+    $conn = Connect();
+    mysqli_query($conn, $inputQuery);
+    CloseConnect($conn);
 }
 
 function cookieCreator( $name, $data ){
@@ -158,8 +171,6 @@ function AddItem( $itemName, $itemDescription, $painting, $digitalPainting, $pot
         $digitalPainting . ', ' . $pottery . ', ' . $textile . ', ' . $sculpture . ', ' . $embroidery . ', \'' .
         $image . '\', ' . $price . ', ' . $soldOut . ', \'' . $username . '\', \'' . $password .
         '\', @responseMessage);';
-
-    echo $inputQuery;
 
    mysqli_query($conn, $inputQuery);
 

@@ -39,9 +39,9 @@ newUserBtn.addEventListener("click", () => {
                 arguments: [newUsername.value, newFirstName.value, newLastName.value, newEmail.value,
                     newPhone.value, newPass.value]
             });
-    
+
             localStorage.setItem('Username', String(newUsername.value));
-    
+
             newUsername.value = "";
             newFirstName.value = "";
             newPass.value = "";
@@ -49,9 +49,9 @@ newUserBtn.addEventListener("click", () => {
             newPhone.value = "";
             newConPass.value = "";
             newLastName.value = "";
-    
+
             document.location.href = '../html/main.html';
-    
+
         } else {
             alertTop("Password and confirmation password must match!")
         }
@@ -85,14 +85,14 @@ loginBtn.addEventListener("click", () =>{
 });
 
 //validate fields
-function ValidateEmail(mail) 
+function ValidateEmail(mail)
 {
  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
   {
-    return (true)
+    return true
   }
   alertTop("You have entered an invalid email address!")
-    return (false)
+    return false
 }
 function ValidatePhoneNumber(number)
 {
@@ -109,7 +109,7 @@ function ValidatePhoneNumber(number)
 function emptyFields(){
     let emptyFlag = 0;
     for (let i = 0; i < inputs.length; i += 1) {
-        if(inputs[i].value == ""){
+        if(inputs[i].value === ""){
             emptyFlag = 1;
         }
     }
@@ -125,7 +125,7 @@ function emptyFields(){
 //no slashes or backslashes in any inputs
 for (let i = 0; i < inputs.length; i += 1) {
     inputs[i].addEventListener("keypress", event => {
-        if ("\\" == (event.key) || "/" == (event.key)) {
+        if ("\\" === (event.key) || "/" === (event.key)) {
           event.preventDefault();
         }
     });
