@@ -44,7 +44,7 @@
             </form>
         </div>
         <div class="artist-settings" id="artist-account">
-            <h1>Artist Settings</h1>
+            <h1 class="artist-heading">Artist Settings</h1>
             <form>
                 <table>
                     <tr>
@@ -71,8 +71,26 @@
             </form>
             <div class="button-row">
                 <button class="color1-button" type="submit">Submit</button>
-                <button class="color1-button">Edit Listings</button>
+                <button id="addListingBtn" class="color1-button" onclick="openForm()">Add Listing</button>
             </div>
+            <div class="form-popup" id="myForm">
+                <h2>New Listing</h1>
+            
+                <label for="title"><b>Title</b></label>
+                <input id="titleIn" type="text" placeholder="Enter Title" name="title" required>
+            
+                <label for="description"><b>Description</b></label>
+                <input id="descrIn" type="text" placeholder="Enter Description" name="description" required>
+                
+                <label for="price"><b>Price</b></label>
+                <input id="priceIn" type="text" placeholder="Enter Price" name="price" required>
+
+                <button id="addBtn" type="submit" class="btn">Add</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+            </div>
+            <h4>Listings:</h4>
+            <ul id="listings">
+            </ul>
         </div>
     </div>
  

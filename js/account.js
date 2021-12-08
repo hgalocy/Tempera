@@ -54,3 +54,64 @@ artistBtn.addEventListener("click", function(){
         divArtist.style.display = "flex";
     }
 })
+
+//adding a listing
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+}
+function closeForm() {
+document.getElementById("myForm").style.display = "none";
+}
+let addBtn = document.getElementById("addBtn");
+let titleIn = document.getElementById("titleIn");
+let descrIn = document.getElementById("descrIn");
+let priceIn = document.getElementById("priceIn");
+addBtn.addEventListener("click", function(){
+    if (titleIn.value == "" || descrIn.value == "" || priceIn.value == ""){
+        alertTop("Enter values for all fields!")
+    }
+    else{
+        //add listing
+        addLi();
+        //TODO database add item
+    }
+})
+let smolBtns = document.getElementsByClassName("smolBtn");
+let ul = document.getElementById("listings");
+let lis = ul.getElementsByTagName("li");
+function addLi() {
+    let li = document.createElement("li");
+    let h5 = document.createElement("h5");
+    h5.innerHTML = titleIn.value;
+    li.appendChild(h5);
+    let btn = document.createElement("BUTTON");
+    btn.classList.add("smolBtn");
+    btn.innerHTML = "Delete";
+    li.appendChild(btn);
+    ul.appendChild(li);
+    //update height of artist settings div
+    let artistSet = document.getElementById("artist-account");
+    var height = artistSet.offsetHeight;
+    var newHeight = height + 32;
+    artistSet.style.height = newHeight + 'px';
+    smolBtns = document.getElementsByClassName("smolBtn");
+    lis = ul.getElementsByTagName("li");
+  }
+//delete lisitng
+document.getElementById("listings").addEventListener("click",function(e) {
+    var tgt = e.target;
+    if (tgt.parentElement.tagName.toUpperCase() == "LI") {
+      tgt.parentNode.parentNode.removeChild(tgt.parentNode); // or tgt.remove();
+      //update height of artist settings div
+      let artistSet = document.getElementById("artist-account");
+      var height = artistSet.offsetHeight;
+      var newHeight = height - 32;
+      artistSet.style.height = newHeight + 'px';
+      //TODO remove from database
+    }
+});
+
+//communicates with index.js to alert()
+function alertTop(mess){
+    window.parent.postMessage("from iframe:" + mess, '*');
+}

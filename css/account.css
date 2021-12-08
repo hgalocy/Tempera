@@ -9,12 +9,15 @@
 .artist-settings{
     display: flex;
     flex-direction: column;
-    height: 470px;
+    height: 520px;
     border:5px solid var(--secondary-color);
     border-radius: 15px;
     margin-left: -5px;
     margin-right: -5px;
     margin-bottom: -5px;
+}
+.artist-heading{
+    padding-bottom: 20px;
 }
 form{
     display: flex;
@@ -42,3 +45,69 @@ button, .button-row{
     align-self: center;
 }
 
+li{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 20px;
+}
+.smolBtn{
+    padding: 5px 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    margin-top: -10px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+h4{
+    margin-bottom: -10px;
+    align-self: center;
+}
+
+
+/*popup form*/
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 100px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  .form-popup input[type=text]{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  /* When the inputs get focus, do something */
+.form-popup input[type=text]:focus{
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/login button */
+  .form-popup .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-popup .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-popup .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
