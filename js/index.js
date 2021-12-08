@@ -38,6 +38,10 @@ logOutBtn.addEventListener("click", function(){
     myFrame.src = '../html/main.html';
 })
 
+let aboutBtn = document.getElementById("aboutBtn");
+aboutBtn.addEventListener("click", function(){
+    myFrame.src = 'html/about.html';
+})
 window.onload = function() {
     for (var i = 0; i < artDropList.length; i++) {
         (function (e) {

@@ -16,12 +16,20 @@ body {
   display: flex;
   flex-direction: column;
 }
+.banner{
+    font-size: 33px;
+    color: white;
+    padding: 17px 50px;
+    background-color: var(--secondary-color);
+    font-weight: 100;
+}
 a{
     text-decoration: none;
     color: black;
-}
-button{
     outline: none;
+}
+button, button:focus, button:active{
+    outline: none !important;
 }
 .content-col{
     display: flex;
