@@ -27,6 +27,7 @@ logOutBtn.addEventListener("click", function(){
     myFrame.src = '../html/main.html';
 })
 
+
 function fillArtistDropdown(text){
     var ul = document.getElementById("storesDropDown");
     var li = document.createElement("li");
@@ -58,7 +59,10 @@ function fillItemFooterDropdown(text){
 }
 
 
-
+let aboutBtn = document.getElementById("aboutBtn");
+aboutBtn.addEventListener("click", function(){
+    myFrame.src = 'html/about.html';
+})
 window.onload = function() {
 
     var numArtists = 0;
