@@ -58,6 +58,26 @@ if( isset($_POST['functionname'])){
             $itemName = GetArtworkTitle();
             echo json_encode(array('result' => $itemName));
             break;
+
+        case "Get-Num-Artists":
+            $numArtists = GetNumArtists();
+            echo json_encode(array('result' => $numArtists));
+            break;
+
+        case "Get-Artist-Names":
+            $artistNames = GetArtistNames();
+            echo json_encode(array('result' => $artistNames));
+            break;
+
+        case "Get-Num-Items":
+            $numItems = GetNumItems();
+            echo json_encode(array('result' => $numItems));
+            break;
+
+        case "Get-Item-Names":
+            $itemNames = GetItemNames();
+            echo json_encode(array('result' => $itemNames));
+            break;
     }
 }
 
@@ -160,6 +180,81 @@ function GetFeaturedArtwork(){
     }
 
 }
+
+function GetNumArtists(){
+    $inputQuery = "SELECT count(Username)\n" .
+        "AS output\n" .
+        "FROM tempera.account\n" .
+        "WHERE IsArtist = 1;";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["output"]];
+    } else {
+        return "Error";
+    }
+}
+
+function GetArtistNames(){
+    $inputQuery = "SELECT Username\n" .
+        "FROM tempera.account\n" .
+        "WHERE IsArtist = 1;";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = "";
+        while( $row = $results->fetch_assoc()){
+            $result .= $row['Username'] . ",";
+        }
+        return $result;
+    } else {
+        return "No Artists";
+    }
+}
+
+function GetNumItems(){
+    $inputQuery = "SELECT count(ItemName)\n" .
+        "AS output\n" .
+        "FROM tempera.items;";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["output"]];
+    } else {
+        return "Error";
+    }
+}
+
+function GetItemNames(){
+    $inputQuery = "SELECT ItemName\n" .
+        "FROM tempera.items;";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = "";
+        while( $row = $results->fetch_assoc()){
+            $result .= $row['ItemName'] . ",";
+        }
+        return $result;
+    } else {
+        return "No Items";
+    }
+}
+
 
 function GetArtworkTitle(){
     $inputQuery = "SELECT ItemName\n" .
