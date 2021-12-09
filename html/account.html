@@ -65,10 +65,11 @@
                     </tr>
                     <tr>
                         <td><label for="photo">Photo:</label></td>
-                        <td><input type="text" id="photo" name="photo"></td>
+                        <td><img id="output" width="200" /></td>
                     </tr>
                 </table>
             </form>
+            <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)">
             <div class="button-row">
                 <button class="color1-button" type="submit">Submit</button>
                 <button id="addListingBtn" class="color1-button" onclick="openForm()">Add Listing</button>

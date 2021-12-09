@@ -58,6 +58,9 @@ if( isset($_POST['functionname'])){
             $itemName = GetArtworkTitle();
             echo json_encode(array('result' => $itemName));
             break;
+        case "saveUserPhoto": //fix this garbage pls
+            $target_dir = "../images"; //TODO change to be correct directory
+            move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)
     }
 }
 
