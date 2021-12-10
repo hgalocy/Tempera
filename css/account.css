@@ -89,7 +89,7 @@ h4{
     background-color: #ddd;
     outline: none;
   }
-  
+
   /* Set a style for the submit/login button */
   .form-popup .btn {
     background-color: #04AA6D;
@@ -101,12 +101,12 @@ h4{
     margin-bottom:10px;
     opacity: 0.8;
   }
-  
+
   /* Add a red background color to the cancel button */
   .form-popup .cancel {
     background-color: red;
   }
-  
+
   /* Add some hover effects to buttons */
   .form-popup .btn:hover, .open-button:hover {
     opacity: 1;

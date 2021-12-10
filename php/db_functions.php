@@ -1,6 +1,5 @@
 <?php
 
-// TODO: All functions need to be recreated utilizing JSON and POST
 header('Content-Type: application/json');
 include 'db_connection.php';
 
@@ -48,6 +47,12 @@ if( isset($_POST['functionname'])){
             echo json_encode(array('result' => $itemDesc . "," . $itemPrice . "," . $itemImg));
             break;
 
+        case "Get-Artist-Data":
+            $username = $_POST['arguments'];
+            [$location, $delivery, $photo, $bio] = GetArtistData($username);
+            echo json_encode(array('result' => $location . "*" . $delivery . "*" . $photo . "*" . $bio));
+            break;
+
         case "Set-IsArtist":
             $username = $_POST['arguments'][0];
             $value = $_POST['arguments'][1];
@@ -58,6 +63,7 @@ if( isset($_POST['functionname'])){
             $itemName = GetArtworkTitle();
             echo json_encode(array('result' => $itemName));
             break;
+
         case "Get-Num-Artists":
             $numArtists = GetNumArtists();
             echo json_encode(array('result' => $numArtists));
@@ -275,6 +281,23 @@ function GetArtworkTitle(){
         return[$result["ItemName"]];
     } else {
         return "No items uploaded to website.";
+    }
+}
+
+function GetArtistData($userName){
+    $inputQuery = "SELECT Location, Delivery, Photo, Bio\n" .
+        "FROM tempera.account\n" .
+        "WHERE Username = \"" . $userName . "\";";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = $results->fetch_assoc();
+        return[$result["Location"], $result["Delivery"], $result["Photo"], $result["Bio"]];
+    } else {
+        return "Artist not found";
     }
 }
 

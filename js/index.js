@@ -27,7 +27,6 @@ logOutBtn.addEventListener("click", function(){
     myFrame.src = '../html/main.html';
 })
 
-
 function fillArtistDropdown(text){
     var ul = document.getElementById("storesDropDown");
     var li = document.createElement("li");
@@ -63,6 +62,12 @@ let aboutBtn = document.getElementById("aboutBtn");
 aboutBtn.addEventListener("click", function(){
     myFrame.src = 'html/about.html';
 })
+
+let aboutBtnFooter = document.getElementsByClassName("dropbtn")[5];
+aboutBtnFooter.addEventListener("click", function(){
+    myFrame.src = 'html/about.html';
+})
+
 window.onload = function() {
 
     var numArtists = 0;
