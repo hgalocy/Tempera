@@ -19,44 +19,134 @@ document.getElementById("account-link").addEventListener("click", function(){
 document.getElementById("favorite-link").addEventListener("click", function(){
     myFrame.src = "html/favorite.html";
 });
-let artistLinks = document.getElementsByClassName("store-option");
-for (var i = 0; i<artistLinks.length; i++){
-    artistLinks[i].addEventListener("click", function(){
-        myFrame.src = "html/artist.html";
-    });
-}
-let artLinks = document.getElementsByClassName("art-option");
-for (var i = 0; i<artLinks.length; i++){
-    artLinks[i].addEventListener("click", function(){
-        localStorage.setItem("ItemName", this.textContent);
-        myFrame.src = "html/art.html";
-    });
-}
+
+
 
 logOutBtn.addEventListener("click", function(){
     localStorage.clear();
     myFrame.src = '../html/main.html';
 })
 
+function fillArtistDropdown(text){
+    var ul = document.getElementById("storesDropDown");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(text));
+    li.setAttribute("class", "store-option")
+    ul.appendChild(li);
+}
+function fillArtistFooterDropdown(text){
+    var ul = document.getElementsByClassName("dropdown-content-footer")[0];
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(text));
+    li.setAttribute("class", "store-option")
+    ul.appendChild(li);
+}
+
+function fillItemDropdown(text){
+    var ul = document.getElementsByClassName("dropdown-content")[1];
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(text));
+    li.setAttribute("class", "art-option")
+    ul.appendChild(li);
+}
+function fillItemFooterDropdown(text){
+    var ul = document.getElementsByClassName("dropdown-content-footer")[1];
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(text));
+    li.setAttribute("class", "art-option")
+    ul.appendChild(li);
+}
+
+
 let aboutBtn = document.getElementById("aboutBtn");
 aboutBtn.addEventListener("click", function(){
     myFrame.src = 'html/about.html';
 })
+
+let aboutBtnFooter = document.getElementsByClassName("dropbtn")[5];
+aboutBtnFooter.addEventListener("click", function(){
+    myFrame.src = 'html/about.html';
+})
+
 window.onload = function() {
-    for (var i = 0; i < artDropList.length; i++) {
-        (function (e) {
-            jQuery.ajax({
-                url: '../php/db_functions.php',
-                dataType: 'json',
-                type: 'post',
-                data: {functionname: 'Get-Artwork-Title'},
-                success: function (response) {
-                    if (!(response.result === 'No items uploaded to website.')) {
-                        artDropList[e].textContent = String(response.result);
-                    }
+
+    var numArtists = 0;
+    jQuery.ajax({
+        async: false,
+        url: '../php/db_functions.php',
+        dataType: 'json',
+        type: 'post',
+        data: {functionname: 'Get-Num-Artists'},
+        success: function(response){
+            if(!(response.result === 'Error')){
+                numArtists = parseInt(response.result);
+            }
+        }
+    });
+
+    jQuery.ajax({
+        url: '../php/db_functions.php',
+        async: false,
+        dataType: 'json',
+        type: 'post',
+        data: {functionname: 'Get-Artist-Names'},
+        success: function(response){
+            if(!(response.result === 'No Artists')){
+                var data = response.result.split(",");
+                for( var i = 0; i < numArtists; i++){
+                    fillArtistDropdown(String(data[i]));
+                    fillArtistFooterDropdown(String(data[i]));
                 }
-            });
-        })(i);
+            }
+        }
+    });
+
+    let artistLinks = document.getElementsByClassName("store-option");
+    for (var i = 0; i<artistLinks.length; i++){
+        artistLinks[i].addEventListener("click", function(){
+            localStorage.setItem("ArtistName", this.textContent);
+            myFrame.src = "html/artist.html";
+        });
+    }
+
+
+    var numItems = 0;
+    jQuery.ajax({
+        async: false,
+        url: '../php/db_functions.php',
+        dataType: 'json',
+        type: 'post',
+        data: {functionname: 'Get-Num-Items'},
+        success: function(response){
+            if(!(response.result === 'Error')){
+                numItems = parseInt(response.result);
+            }
+        }
+    });
+
+    jQuery.ajax({
+        url: '../php/db_functions.php',
+        async: false,
+        dataType: 'json',
+        type: 'post',
+        data: {functionname: 'Get-Item-Names'},
+        success: function(response){
+            if(!(response.result === 'No Items')){
+                var data = response.result.split(",");
+                for( var i = 0; i < numItems; i++){
+                    fillItemDropdown(String(data[i]));
+                    fillItemFooterDropdown(String(data[i]));
+                }
+            }
+        }
+    });
+
+    let artLinks = document.getElementsByClassName("art-option");
+    for (var i = 0; i<artLinks.length; i++){
+        artLinks[i].addEventListener("click", function(){
+            localStorage.setItem("ItemName", this.textContent);
+            myFrame.src = "html/art.html";
+        });
     }
 }
 
