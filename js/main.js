@@ -38,6 +38,7 @@ signUpBtn.addEventListener("click", () => {
 window.onload = function() {
     jQuery.ajax({
         url: '../php/db_functions.php',
+        async: false,
         dataType: 'json',
         type: 'post',
         data: {functionname: 'Get-Featured-Artist'},
