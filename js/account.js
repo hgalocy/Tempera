@@ -39,6 +39,7 @@ window.onload = function(){
 
 let artistBtn = document.getElementById("artistBtn");
 artistBtn.addEventListener("click", function(){
+    //TODO store in database when value changes
     if(localStorage.getItem("IsArtist") === '1'){ //flip to non artist
         artistBtn.style.backgroundColor = "gray";
         artistBtn.innerHTML="Not Artist"

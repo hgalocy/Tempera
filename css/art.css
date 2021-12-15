@@ -3,6 +3,7 @@
     height: 45px;
     margin: 10px;
     margin-left: 20px;
+    cursor: pointer;
 }
 #art-photo{
     width: 55%;
