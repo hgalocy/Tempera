@@ -18,8 +18,6 @@ switch (localStorage.getItem("IsArtist")){
 
 //handle artist button
 window.onload = function(){
-
-    console.log("executed")
     if(localStorage.getItem("IsArtist") === "0"){ //flip to non artist
         artistBtn.style.backgroundColor = "gray";
         artistBtn.innerHTML="Not Artist"
@@ -111,20 +109,19 @@ document.getElementById("listings").addEventListener("click",function(e) {
     }
 });
 
-
 //handle images
 /* The uploader form */
 var loadFile = function(event) {
-	var image = document.getElementById('output');
+	let image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
 
-    //save to folder
-    $.post('../php/db_functions.php', {
+    //save to folder  TODO
+    /*$.post('../php/db_functions.php', {
         functionName: 'saveUserPhoto',
         arguments: [event.target.files[0]]
-    });
-
+    });*/
 };
+
 
 //communicates with index.js to alert()
 function alertTop(mess){
