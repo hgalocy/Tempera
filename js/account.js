@@ -114,7 +114,15 @@ document.getElementById("listings").addEventListener("click",function(e) {
 var loadFile = function(event) {
 	let image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
-
+    //save to folder  TODO
+    /*$.post('../php/db_functions.php', {
+        functionName: 'saveUserPhoto',
+        arguments: [event.target.files[0]]
+    });*/
+};
+var loadFile2 = function(event) {
+	let image = document.getElementById('output2');
+	image.src = URL.createObjectURL(event.target.files[0]);
     //save to folder  TODO
     /*$.post('../php/db_functions.php', {
         functionName: 'saveUserPhoto',
