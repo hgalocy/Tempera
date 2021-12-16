@@ -69,6 +69,14 @@ aboutBtnFooter.addEventListener("click", function(){
 })
 
 window.onload = function() {
+    //check if logged in the show logout button or not
+    let logoutBtn = document.getElementById("logoutBtn");
+    if(localStorage.getItem("Username") == null || localStorage.getItem("Username") == ""){
+        logoutBtn.style.visibility = "hidden";
+    }
+    else{
+        logoutBtn.style.visibility = "visible";
+    }
 
     var numArtists = 0;
     jQuery.ajax({
