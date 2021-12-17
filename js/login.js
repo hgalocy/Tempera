@@ -34,10 +34,14 @@ newUserBtn.addEventListener("click", () => {
     let newConPass = document.getElementById("newConPassword");
     if(ValidateEmail(newEmail.value) && ValidatePhoneNumber(newPhone.value) && emptyFields()){ //email & number format is correct
         if( newPass.value === newConPass.value) {
-            $.post('../php/db_functions.php', {
-                functionname: 'AddUser',
-                arguments: [newUsername.value, newFirstName.value, newLastName.value, newEmail.value,
-                    newPhone.value, newPass.value]
+
+            jQuery.ajax({
+                url: '../php/db_functions.php',
+                async: false,
+                dataType: 'json',
+                type: 'post',
+                data: {functionname: 'AddUser', arguments: [newUsername.value, newFirstName.value, newLastName.value,
+                    newEmail.value, newPhone.value, newPass.value]}
             });
 
             localStorage.setItem('Username', String(newUsername.value));
@@ -65,6 +69,7 @@ loginBtn.addEventListener("click", () =>{
     jQuery.ajax({
         url: '../php/db_functions.php',
         dataType: 'json',
+        async: false,
         type: "post",
         data: {functionname: 'Login', arguments: [email.value, password.value]},
         success: function(response){

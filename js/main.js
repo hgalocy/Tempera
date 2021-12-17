@@ -51,7 +51,34 @@ window.onload = function() {
         }
     });
 
-    for( var i = 0; i < featuredArtTitle.length; i++){
+    jQuery.ajax({
+        url: '../php/db_functions.php',
+        async: false,
+        dataType: 'json',
+        type: 'post',
+        data: {functionname: 'Get-Featured-Artwork', arguments: featuredArtTitle.length} ,
+        success: function (response) {
+            if (!(response.result === 'No items uploaded to website.')) {
+                var data = response.result.split(",");
+                featuredArtTitle[0].textContent = String(data[0]);
+                for( var e = 0; e < featuredArtTitle.length; e++ ){
+                    featuredArtTitle[e].textContent = String(data[e * (featuredArtTitle.length - 1)]);
+                    var priceString = "$".concat(String(data[(e * (featuredArtTitle.length - 1)) + 1]));
+                    featuredArtPrice[e].textContent = priceString;
+                    featuredArtImg[e].src = String(data[(e * (featuredArtTitle.length - 1)) + 2]);
+                }
+
+                //for( var e = 0; e < featuredArtTitle.length; e++) {
+                    //featuredArtTitle[e].textContent = String(data[0]);
+                    //var priceString = "$".concat(String(data[(e * (featuredArtTitle.length - 1) + 1]));
+                    //featuredArtPrice[e].textContent = priceString;
+                    //featuredArtImg[e].src = String(data[(e * (featuredArtTitle.length - 1)) + 2]);
+                //}
+            }
+        }
+    });
+
+    /*for( var i = 0; i < featuredArtTitle.length; i++){
         (function(e) {
             jQuery.ajax({
                 url: '../php/db_functions.php',
@@ -69,6 +96,6 @@ window.onload = function() {
                 }
             });
         })(i);
-    }
+    }*/
 
 };

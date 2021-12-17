@@ -69,9 +69,11 @@
                     </tr>
                 </table>
             </form>
-            <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)">
+
+            <input type="file"  accept="image/*" name="file" id="file"  onchange="loadFile(event)">
+
             <div class="button-row">
-                <button class="color1-button" type="submit">Submit</button>
+                <button class="color1-button" id="Artist-Data-Update" type="submit">Submit</button>
                 <button id="addListingBtn" class="color1-button" onclick="openForm()">Add Listing</button>
             </div>
             <div class="form-popup" id="myForm">
@@ -85,7 +87,7 @@
 
                 <label for="price"><b>Price</b></label>
                 <input id="priceIn" type="text" placeholder="Enter Price" name="price" required>
-                
+
                 <label for="photo">Photo:</label>
                 <img onchange="changeHeight(event)" id="output2" height="150" />
                 <input type="file"  accept="image/*" name="image" id="file2"  onchange="loadFile2(event)">
