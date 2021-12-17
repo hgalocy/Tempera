@@ -111,7 +111,7 @@ h4{
   .form-popup .btn:hover, .open-button:hover {
     opacity: 1;
   }
-  #file{
+  #file, #file2{
       background-color: white;
       align-self: center;
   }
