@@ -62,40 +62,12 @@ window.onload = function() {
                 var data = response.result.split(",");
                 featuredArtTitle[0].textContent = String(data[0]);
                 for( var e = 0; e < featuredArtTitle.length; e++ ){
-                    featuredArtTitle[e].textContent = String(data[e * (featuredArtTitle.length - 1)]);
-                    var priceString = "$".concat(String(data[(e * (featuredArtTitle.length - 1)) + 1]));
+                    featuredArtTitle[e].textContent = String(data[e * 3]);
+                    var priceString = "$".concat(String(data[(e * 3) + 1]));
                     featuredArtPrice[e].textContent = priceString;
-                    featuredArtImg[e].src = String(data[(e * (featuredArtTitle.length - 1)) + 2]);
+                    featuredArtImg[e].src = String(data[(e * 3) + 2]);
                 }
-
-                //for( var e = 0; e < featuredArtTitle.length; e++) {
-                    //featuredArtTitle[e].textContent = String(data[0]);
-                    //var priceString = "$".concat(String(data[(e * (featuredArtTitle.length - 1) + 1]));
-                    //featuredArtPrice[e].textContent = priceString;
-                    //featuredArtImg[e].src = String(data[(e * (featuredArtTitle.length - 1)) + 2]);
-                //}
             }
         }
     });
-
-    /*for( var i = 0; i < featuredArtTitle.length; i++){
-        (function(e) {
-            jQuery.ajax({
-                url: '../php/db_functions.php',
-                dataType: 'json',
-                type: 'post',
-                data: {functionname: 'Get-Featured-Artwork'},
-                success: function (response) {
-                    if (!(response.result === 'No items uploaded to website.')) {
-                        var data = response.result.split(",");
-                        featuredArtTitle[e].textContent = String(data[0]);
-                        var priceString = "$".concat(String(data[1]));
-                        featuredArtPrice[e].textContent = priceString;
-                        featuredArtImg[e].src = String(data[2]);
-                    }
-                }
-            });
-        })(i);
-    }*/
-
 };
