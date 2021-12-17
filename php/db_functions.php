@@ -3,8 +3,14 @@
 header('Content-Type: application/json');
 include 'db_connection.php';
 
+$username = 'DirectoryTest2';
+
 if( isset($_POST['functionname'])){
     switch($_POST['functionname']){
+        case "SetImgUsername":
+            $username = $_POST['arguments'][0];
+            break;
+
         case "AddUser":
             $username = $_POST['arguments'][0];
             $firstname = $_POST['arguments'][1];
@@ -37,8 +43,9 @@ if( isset($_POST['functionname'])){
             break;
 
         case "Get-Featured-Artwork":
-            [$itemName, $price, $image] = GetFeaturedArtwork();
-            echo json_encode(array('result' => $itemName . ","  . $price . "," . $image));
+            $numItems = $_POST['arguments'];
+            $artistData = GetFeaturedArtwork($numItems);
+            echo json_encode(array('result' => $artistData));
             break;
 
         case "Get-Item":
@@ -83,12 +90,42 @@ if( isset($_POST['functionname'])){
             $itemNames = GetItemNames();
             echo json_encode(array('result' => $itemNames));
             break;
+
         case "saveUserPhoto": //fix this garbage pls
             $target_dir = "../images"; //TODO change to be correct directory
             move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
             break;
 
     }
+} else {
+
+    if(isset($_FILES['file']['name'])){
+
+        /* Getting file name */
+        $filename = $_FILES['file']['name'];
+
+        /* Location */
+        $location = "C:/xampp/htdocs/images/user_pictures/" . $username . "/" .$filename;
+        $imageFileType = pathinfo($location,PATHINFO_EXTENSION);
+        $imageFileType = strtolower($imageFileType);
+
+        /* Valid extensions */
+        $valid_extensions = array("jpg","jpeg","png");
+
+        $response = 0;
+        /* Check file extension */
+        if(in_array(strtolower($imageFileType), $valid_extensions)) {
+            /* Upload file */
+            if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+                $response = $location;
+            }
+        }
+
+        echo $response;
+        exit;
+    }
+
+    echo 0;
 }
 
 function IsArtist($username, $value){
@@ -170,23 +207,26 @@ function GetFeaturedArtist(){
     }
 }
 
-function GetFeaturedArtwork(){
+function GetFeaturedArtwork($numItems){
     $conn = Connect();
 
-    $inputQuery = "SELECT ItemName, Price, Image\n" .
+    $inputQuery = "SELECT DISTINCT ItemName, Price, Image\n" .
         "FROM tempera.items\n" .
         "ORDER BY RAND()\n" .
-        "LIMIT 1;";
+        "LIMIT " . intval($numItems) . ";";
 
     $results = $conn -> query($inputQuery);
 
     CloseConnect($conn);
 
-    if($results->num_rows > 0){
-        $result = $results->fetch_assoc();
-        return[$result["ItemName"], $result["Price"], $result["Image"]];
+    if( $results->num_rows > 0){
+        $result = "";
+        while( $row = $results->fetch_assoc()){
+            $result .= $row['ItemName'] . "," . $row['Price'] . "," . $row['Image'] . ",";
+        }
+        return $result;
     } else {
-        return "No items uploaded to website";
+        return "No Items";
     }
 
 }
@@ -265,7 +305,6 @@ function GetItemNames(){
     }
 }
 
-
 function GetArtworkTitle(){
     $inputQuery = "SELECT ItemName\n" .
         "FROM tempera.items\n" .
@@ -316,6 +355,8 @@ $bio, $location, $specPainting, $specDigitalPainting, $specTextile, $specEmbroid
     mysqli_query($conn, $inputQuery);
 
     CloseConnect($conn);
+
+    mkdir("C:/xampp/htdocs/images/user_pictures/" . $userName . "/artworks", 0777, TRUE);
 }
 
 /*

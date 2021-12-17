@@ -2,7 +2,7 @@
 
 function Connect()
 {
-    $dbhost = "localhost";
+    $dbhost = "localhost:3307";
     $dbuser = "website";
     $dbpass = "temperaWebservice";
     $dbname = "Tempera";

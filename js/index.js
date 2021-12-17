@@ -4,7 +4,18 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 let logOutBtn = document.getElementById("logoutBtn");
-let artDropList = document.getElementsByClassName("drop-option art-option");
+let loginBtn = document.getElementById("Submit-Login");
+
+
+switch (localStorage.getItem("Username")){
+    case null:
+        logOutBtn.style.display = "none";
+        break;
+
+    default:
+        logOutBtn.style.display = "flex";
+        break
+}
 
 //adjust iframe size dynamically
 let options = {
@@ -20,11 +31,10 @@ document.getElementById("favorite-link").addEventListener("click", function(){
     myFrame.src = "html/favorite.html";
 });
 
-
-
 logOutBtn.addEventListener("click", function(){
     localStorage.clear();
     myFrame.src = '../html/main.html';
+    logOutBtn.style.display = 'none';
 })
 
 function fillArtistDropdown(text){
@@ -148,6 +158,18 @@ window.onload = function() {
             myFrame.src = "html/art.html";
         });
     }
+
+
+    switch (localStorage.getItem("Username")){
+        case null:
+            logOutBtn.style.display = "none";
+            break;
+
+        default:
+            logOutBtn.style.display = "flex";
+            break
+    }
+
 }
 
 //iframe messaging

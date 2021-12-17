@@ -6,6 +6,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 //let divAccount = document.getElementById("basic-account");
 let divArtist = document.getElementById("artist-account");
+let artistDataSub = document.getElementById("Artist-Data-Update");
+let fileData = document.getElementsByClassName("file");
 
 switch (localStorage.getItem("IsArtist")){
     case "1":
@@ -62,6 +64,7 @@ function openForm() {
 function closeForm() {
 document.getElementById("myForm").style.display = "none";
 }
+
 let addBtn = document.getElementById("addBtn");
 let titleIn = document.getElementById("titleIn");
 let descrIn = document.getElementById("descrIn");
@@ -117,14 +120,38 @@ document.getElementById("listings").addEventListener("click",function(e) {
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
-
-    //save to folder
-    $.post('../php/db_functions.php', {
-        functionName: 'saveUserPhoto',
-        arguments: [event.target.files[0]]
-    });
-
 };
+
+artistDataSub.addEventListener("click", function(){
+    var fd = new FormData();
+    var files = $('#file')[0].files;
+
+    var blob = files[0].slice(0, files[0].size, 'image/jpeg');
+    var newFile = new File([blob], 'name.jpeg', {type: 'image/jpeg'});
+
+
+    if( files.length > 0 ) {
+        fd.append('file', newFile);
+
+        jQuery.ajax({
+            url: '../php/db_functions.php',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                if( response !== 0){
+
+                }
+            }
+
+        });
+
+
+    } else {
+
+    };
+})
 
 //communicates with index.js to alert()
 function alertTop(mess){
