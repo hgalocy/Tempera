@@ -118,10 +118,9 @@ document.getElementById("listings").addEventListener("click",function(e) {
 var loadFile = function(event) {
 	let image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
-<<<<<<< HEAD
 };
 
-artistDataSub.addEventListener("click", function(){
+artistDataSub.addEventListener("click", function() {
     var fd = new FormData();
     var files = $('#file')[0].files;
 
@@ -129,7 +128,7 @@ artistDataSub.addEventListener("click", function(){
     var newFile = new File([blob], 'name.jpeg', {type: 'image/jpeg'});
 
 
-    if( files.length > 0 ) {
+    if (files.length > 0) {
         fd.append('file', newFile);
 
         jQuery.ajax({
@@ -138,8 +137,8 @@ artistDataSub.addEventListener("click", function(){
             data: fd,
             contentType: false,
             processData: false,
-            success: function(response){
-                if( response !== 0){
+            success: function (response) {
+                if (response !== 0) {
 
                 }
             }
@@ -150,14 +149,8 @@ artistDataSub.addEventListener("click", function(){
     } else {
 
     };
-})
-=======
-    //save to folder  TODO
-    /*$.post('../php/db_functions.php', {
-        functionName: 'saveUserPhoto',
-        arguments: [event.target.files[0]]
-    });*/
-};
+});
+
 var loadFile2 = function(event) {
 	let image = document.getElementById('output2');
 	image.src = URL.createObjectURL(event.target.files[0]);
@@ -167,8 +160,6 @@ var loadFile2 = function(event) {
         arguments: [event.target.files[0]]
     });*/
 };
-
->>>>>>> 761257fc6a73218bfb148915fb63f82a60476e0f
 
 //communicates with index.js to alert()
 function alertTop(mess){

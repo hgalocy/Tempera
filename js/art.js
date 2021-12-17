@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //include jquery 3.4.1
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
@@ -55,7 +54,7 @@ window.onload = function() {
     }
 
 };
-=======
+
 //TODO allow submitting mesages to database
 //TODO load whether art is favorited already on page load
 let favorited = document.getElementById("favorited");
@@ -69,4 +68,3 @@ favorited.addEventListener("click", function(){
         favorited.src = "../images/favorite2.png";
     }
 })
->>>>>>> 761257fc6a73218bfb148915fb63f82a60476e0f
