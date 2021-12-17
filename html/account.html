@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <td><label for="photo">Photo:</label></td>
-                        <td><img id="output" width="200" /></td>
+                        <td><img onchange="changeHeight(event)" id="output" height="150" /></td>
                     </tr>
                 </table>
             </form>
@@ -87,6 +87,10 @@
 
                 <label for="price"><b>Price</b></label>
                 <input id="priceIn" type="text" placeholder="Enter Price" name="price" required>
+                
+                <label for="photo">Photo:</label>
+                <img onchange="changeHeight(event)" id="output2" height="150" />
+                <input type="file"  accept="image/*" name="image" id="file2"  onchange="loadFile2(event)">
 
                 <button id="addBtn" type="submit" class="btn">Add</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>

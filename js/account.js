@@ -20,8 +20,6 @@ switch (localStorage.getItem("IsArtist")){
 
 //handle artist button
 window.onload = function(){
-
-    console.log("executed")
     if(localStorage.getItem("IsArtist") === "0"){ //flip to non artist
         artistBtn.style.backgroundColor = "gray";
         artistBtn.innerHTML="Not Artist"
@@ -43,6 +41,7 @@ window.onload = function(){
 
 let artistBtn = document.getElementById("artistBtn");
 artistBtn.addEventListener("click", function(){
+    //TODO store in database when value changes
     if(localStorage.getItem("IsArtist") === '1'){ //flip to non artist
         artistBtn.style.backgroundColor = "gray";
         artistBtn.innerHTML="Not Artist"
@@ -114,12 +113,12 @@ document.getElementById("listings").addEventListener("click",function(e) {
     }
 });
 
-
 //handle images
 /* The uploader form */
 var loadFile = function(event) {
-	var image = document.getElementById('output');
+	let image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
+<<<<<<< HEAD
 };
 
 artistDataSub.addEventListener("click", function(){
@@ -152,6 +151,24 @@ artistDataSub.addEventListener("click", function(){
 
     };
 })
+=======
+    //save to folder  TODO
+    /*$.post('../php/db_functions.php', {
+        functionName: 'saveUserPhoto',
+        arguments: [event.target.files[0]]
+    });*/
+};
+var loadFile2 = function(event) {
+	let image = document.getElementById('output2');
+	image.src = URL.createObjectURL(event.target.files[0]);
+    //save to folder  TODO
+    /*$.post('../php/db_functions.php', {
+        functionName: 'saveUserPhoto',
+        arguments: [event.target.files[0]]
+    });*/
+};
+
+>>>>>>> 761257fc6a73218bfb148915fb63f82a60476e0f
 
 //communicates with index.js to alert()
 function alertTop(mess){
