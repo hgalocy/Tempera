@@ -4,6 +4,8 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+let accountDetails = document.getElementsByClassName("account-text");
+
 //let divAccount = document.getElementById("basic-account");
 let divArtist = document.getElementById("artist-account");
 let artistDataSub = document.getElementById("Artist-Data-Update");
@@ -125,7 +127,8 @@ artistDataSub.addEventListener("click", function() {
     var files = $('#file')[0].files;
 
     var blob = files[0].slice(0, files[0].size, 'image/jpeg');
-    var newFile = new File([blob], 'name.jpeg', {type: 'image/jpeg'});
+    let fileLoc = localStorage.getItem("Username") + "/" + "userImg.jpeg";
+    var newFile = new File([blob], String(fileLoc), {type: 'image/jpeg'});
 
 
     if (files.length > 0) {

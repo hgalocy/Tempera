@@ -3,14 +3,18 @@
 header('Content-Type: application/json');
 include 'db_connection.php';
 
-$username = 'DirectoryTest2';
-
 if( isset($_POST['functionname'])){
     switch($_POST['functionname']){
         case "SetImgUsername":
             $username = $_POST['arguments'][0];
             break;
 
+        case "SetFavorite":
+            $fav = $_POST['arguments'][0];
+            $username = $_POST['arguments'][1];
+            $itemName = $_POST['arguments'][2];
+            SetFavorite($fav, $username, $itemName);
+            break;
         case "AddUser":
             $username = $_POST['arguments'][0];
             $firstname = $_POST['arguments'][1];
@@ -40,6 +44,12 @@ if( isset($_POST['functionname'])){
         case "Get-Featured-Artist":
             [$username, $photo] = GetFeaturedArtist();
             echo json_encode(array('result' => $username . "," . $photo));
+            break;
+
+        case "Get-Artists-Work":
+            $username = $_POST['arguments'];
+            $artworkData = GetArtistsWork($username);
+            echo json_encode(array('result' => $artworkData));
             break;
 
         case "Get-Featured-Artwork":
@@ -91,11 +101,24 @@ if( isset($_POST['functionname'])){
             echo json_encode(array('result' => $itemNames));
             break;
 
-        case "saveUserPhoto": //fix this garbage pls
-            $target_dir = "../images"; //TODO change to be correct directory
-            move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+        case "Check-If-Fav":
+            $username = $_POST['arguments'][0];
+            $itemName = $_POST['arguments'][1];
+            $isFav = CheckFav($username, $itemName);
+            echo json_encode(array('result' => $isFav));
             break;
 
+        case "Get-Account-Info":
+            $username = $_POST['arguments'];
+            $favs = GetAccountInfo($username);
+            echo json_encode(array('result' => $favs));
+            break;
+
+        case "Get-Favorites":
+            $username = $_POST['arguments'];
+            $favs = GetFavorites($username);
+            echo json_encode(array('result' => $favs));
+            break;
     }
 } else {
 
@@ -105,7 +128,7 @@ if( isset($_POST['functionname'])){
         $filename = $_FILES['file']['name'];
 
         /* Location */
-        $location = "C:/xampp/htdocs/images/user_pictures/" . $username . "/" .$filename;
+        $location = "C:/xampp/htdocs/images/user_pictures/" . $filename;
         $imageFileType = pathinfo($location,PATHINFO_EXTENSION);
         $imageFileType = strtolower($imageFileType);
 
@@ -186,6 +209,71 @@ function GetItemDetails($itemName){
     }
 }
 
+function CheckFav($username, $itemName){
+    $inputQuery = "select count(ItemID_fk)\n" .
+    "AS favorited\n" .
+    "FROM tempera.favorites\n" .
+    "WHERE UserID_fk=ANY(\n" .
+    "SELECT UserID\n" .
+    "FROM tempera.account\n" .
+    "WHERE Username = \"" . $username . "\")\n" .
+    "AND ItemID_fk = ANY(\n" .
+    "SELECT ItemID\n" .
+    "FROM tempera.items\n" .
+    "WHERE ItemName = \"" . $itemName . "\");";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0 ){
+        $result = $results->fetch_assoc();
+        return $result['favorited'];
+    } else {
+        return "Error";
+    }
+}
+
+function GetFavorites($username){
+    $inputQuery = "SELECT ItemName, Price, Image\n" .
+    "FROM tempera.items\n" .
+    "LEFT join tempera.favorites\n" .
+    "ON tempera.items.ItemID = tempera.favorites.ItemID_fk\n" .
+    "WHERE UserID_fk=ANY(\n" .
+    "SELECT UserID\n" .
+    "FROM tempera.account\n" .
+    "WHERE Username = \"" . $username . "\");" ;
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = "";
+        while( $row = $results->fetch_assoc()){
+            $result .= $row['ItemName'] . "," . $row['Price'] . "," . $row['Image'] . ",";
+        }
+        return $result;
+    } else {
+        return "No Items";
+    }
+
+}
+
+function SetFavorite($favBit, $username, $itemName){
+    if( $favBit == '1'){
+        $inputQuery = "CALL tempera.favorite( \"" . $username . "\",\"" . $itemName . "\");";
+    } else {
+        $inputQuery = "CALL tempera.unfavorite( \"" . $username . "\",\"" . $itemName . "\");";
+    }
+
+    echo $inputQuery;
+
+    $conn = Connect();
+    mysqli_query($conn, $inputQuery);
+    CloseConnect($conn);
+}
+
 function GetFeaturedArtist(){
     $conn = Connect();
 
@@ -206,6 +294,32 @@ function GetFeaturedArtist(){
         return "No current artists.";
     }
 }
+
+
+function GetArtistsWork($username){
+    $conn = Connect();
+
+    $inputQuery = "SELECT ItemName, Price, Image\n" .
+        "FROM tempera.items\n" .
+        "LEFT JOIN tempera.account ON tempera.items.ArtistID_fk=tempera.account.UserID\n" .
+        "WHERE Username = \"" . $username ."\";";
+
+    $results = $conn -> query($inputQuery);
+
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = "";
+        while( $row = $results->fetch_assoc()){
+            $result .= $row['ItemName'] . "," . $row['Price'] . "," . $row['Image'] . ",";
+        }
+        return $result;
+    } else {
+        return "No Items";
+    }
+
+}
+
 
 function GetFeaturedArtwork($numItems){
     $conn = Connect();
@@ -298,6 +412,27 @@ function GetItemNames(){
         $result = "";
         while( $row = $results->fetch_assoc()){
             $result .= $row['ItemName'] . ",";
+        }
+        return $result;
+    } else {
+        return "No Items";
+    }
+}
+
+function GetAccountInfo($username){
+    $inputString = "SELECT Email, Username, PhoneNumber, Bio, Location, Delivery, Photo\n" .
+    "FROM tempera.account\n" .
+    "WHERE Username = \"" . $username . "\";";
+
+    $conn = Connect();
+    $results = $conn -> query($inputQuery);
+    CloseConnect($conn);
+
+    if( $results->num_rows > 0){
+        $result = "";
+        while( $row = $results->fetch_assoc()){
+            $result .= $row['Email'] . "," . $row['Username'] . "," . $row['PhoneNumber'] . "," . $row['Bio'] .
+            $row['Location'] . "," . $row['Delivery'] . "," . $row['Photo'];
         }
         return $result;
     } else {
